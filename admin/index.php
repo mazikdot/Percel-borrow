@@ -1,31 +1,28 @@
 <?php
 session_start();
 include('includes/config.php');
-if(isset($_POST['signin']))
-{
-$uname=$_POST['username'];
-$password=$_POST['password'];
-$sql ="SELECT UserName,Password FROM admin WHERE UserName=:uname and Password=:password";
-$query= $dbh -> prepare($sql);
-$query-> bindParam(':uname', $uname, PDO::PARAM_STR);
-$query-> bindParam(':password', $password, PDO::PARAM_STR);
-$query-> execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
-if($query->rowCount() > 0)
-{
-$_SESSION['alogin']=$_POST['username'];
-echo "<script type='text/javascript'> document.location = 'dashboard.php'; </script>";
-} else{
-    echo'
+if (isset($_POST['signin'])) {
+    $uname = $_POST['username'];
+    $password = $_POST['password'];
+    $sql = "SELECT UserName,Password FROM admin WHERE UserName=:uname and Password=:password";
+    $query = $dbh->prepare($sql);
+    $query->bindParam(':uname', $uname, PDO::PARAM_STR);
+    $query->bindParam(':password', $password, PDO::PARAM_STR);
+    $query->execute();
+    $results = $query->fetchAll(PDO::FETCH_OBJ);
+    if ($query->rowCount() > 0) {
+        $_SESSION['alogin'] = $_POST['username'];
+        echo "<script type='text/javascript'> document.location = 'dashboard.php'; </script>";
+    } else {
+        echo '
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <srcript src="https://code.jquery.com/jquery-3.6.0.min.js"></srcript>
 ';
-  echo "
+        echo "
   <script>
   swal('เกิดข้อผิดพลาดโปรดลองใหม่!','กดปุ่มเพื่อลองใหม่!','warning');
   </script>";
-}
-
+    }
 }
 
 ?>
@@ -56,20 +53,20 @@ echo "<script type='text/javascript'> document.location = 'dashboard.php'; </scr
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped&display=swap" rel="stylesheet">
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped&display=swap');
     </style>
     <style>
-    body {
-        font-family: 'IBM Plex Sans Thai Looped', sans-serif;
-    }
+        body {
+            font-family: 'IBM Plex Sans Thai Looped', sans-serif;
+        }
     </style>
 
     <!-- icon -->
     <link rel="icon" type="image/png" href="/admin/includes/icon-company.jpg" />
 
     <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
-    
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+
 </head>
 
 <button class="btn btn-primary" type="button"><a href="../index.php">
@@ -89,19 +86,16 @@ echo "<script type='text/javascript'> document.location = 'dashboard.php'; </scr
                                 <div class="row">
                                     <form class="col s12" name="signin" method="post">
                                         <div class="input-field col s12">
-                                            <input id="username" type="text" name="username" class="validate"
-                                                autocomplete="off" required>
+                                            <input id="username" type="text" name="username" class="validate" autocomplete="off" required>
                                             <label for="email">Username</label>
                                         </div>
                                         <div class="input-field col s12">
-                                            <input id="password" type="password" class="validate" name="password"
-                                                autocomplete="off" required>
+                                            <input id="password" type="password" class="validate" name="password" autocomplete="off" required>
                                             <label for="password">Password</label>
                                         </div>
                                         <div class="col s12 right-align m-t-sm">
 
-                                            <input type="submit" name="signin" value="Sign in"
-                                                class="waves-effect waves-light btn teal">
+                                            <input type="submit" name="signin" value="Sign in" class="waves-effect waves-light btn teal">
                                         </div>
                                     </form>
                                 </div>
@@ -123,7 +117,7 @@ echo "<script type='text/javascript'> document.location = 'dashboard.php'; </scr
 
     <!-- font -->
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap');
     </style>
 
 </body>

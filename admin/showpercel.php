@@ -1,12 +1,17 @@
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<srcript src="https://code.jquery.com/jquery-3.6.0.min.js"></srcript>
 <?php
 session_start();
 include('includes/config.php');
 if (strlen($_SESSION['alogin']) == 0) {
     header('location:index.php');
-} 
-
+} else {
+    if (isset($_GET['del'])) {
+        $id = $_GET['del'];
+        $sql = "delete from  tblleavetype  WHERE id=:id";
+        $query = $dbh->prepare($sql);
+        $query->bindParam(':id', $id, PDO::PARAM_STR);
+        $query->execute();
+        $msg = "ทำรายการลบประเภทการลาแล้ว";
+    }
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -14,7 +19,7 @@ if (strlen($_SESSION['alogin']) == 0) {
     <head>
 
         <!-- Title -->
-        <title>Admin | Manage Employees</title>
+        <title>Admin | Show Percel</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta charset="UTF-8">
@@ -74,43 +79,36 @@ if (strlen($_SESSION['alogin']) == 0) {
         <?php include('includes/sidebar.php'); ?>
         <main class="mn-inner">
             <div class="row">
-
+               
 
                 <div class="col s12 m12 l12">
                     <div class="card">
                         <div class="card-content">
-                            <span class="card-title">ข้อมูลบัญชีพนักงานทั้งหมด</span>
+                            <span class="card-title">ชื่อพัสดุทั้งหมด (ไม่ใช่ชนิดของพัสดุ)</span>
                             <table id="example" class="display responsive-table ">
                                 <thead>
                                     <tr>
                                         <th>ลำดับ</th>
-                                        <th>ชื่อ-นามสกุล</th>
-
-                                        <th>อีเมล</th>
-                                        <th>ที่อยู่</th>
-                                        <th>เบอร์โทร</th>
-                                        <th>วันที่สร้างบัญชี</th>
+                                        <th>ชื่อ</th>
+                                       
                                         <th>Action</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    <?php $sql = "SELECT * from  tblemployees";
+                                    <?php $sql = "SELECT * from tbpercel";
                                     $query = $dbh->prepare($sql);
                                     $query->execute();
-                                    $results = $query->fetchAll(PDO::FETCH_ASSOC);
+                                    $results = $query->fetchAll(PDO::FETCH_OBJ);
                                     $cnt = 1;
                                     if ($query->rowCount() > 0) {
                                         foreach ($results as $result) {               ?>
                                             <tr>
                                                 <td> <?php echo htmlentities($cnt); ?></td>
-                                                <td><?php echo "{$result['FirstName']} {$result['LastName']}"; ?></td>
-                                                <td><?php echo "{$result['EmailId']}"; ?></td>
-                                                <td><?php echo "{$result['Address']}"; ?></td>
-                                                <td><?php echo "{$result['Phonenumber']}"; ?></td>
-                                                <td><?php echo "{$result['RegDate']}"; ?></td>
-                                                <td><a href="editemployee.php?empid=<?php echo "{$result['id']}";  ?>"><i class="material-icons">mode_edit</i></a>
-                                                        <button style="border: none; outline: none; background: none;" onCLick="deleteEmployee(<?php echo $result['id']; ?>)"><i class=" material-icons" title="Inactive">clear</i></button>
+                                              
+                                                <td><?php echo htmlentities($result->PercelName); ?></td>
+                                                <td><a href="editleavetype.php?lid=<?php echo htmlentities($result->id); ?>"><i class="material-icons">mode_edit</i></a>
+                                                    <a href="manageleavetype.php?del=<?php echo htmlentities($result->id); ?>" onclick="return confirm('Do you want to delete');"> <i class="material-icons">delete_forever</i></a>
                                                 </td>
                                             </tr>
                                     <?php $cnt++;
@@ -136,39 +134,7 @@ if (strlen($_SESSION['alogin']) == 0) {
         <script src="../assets/js/alpha.min.js"></script>
         <script src="../assets/js/pages/table-data.js"></script>
 
-        <script>
-            deleteEmployee = (id) => {
-                swal({
-                    title: "คุณต้องการลบข้อมูลนี้ ใช่หรือไม่",
-                    text: "หากทำการลบข้อมูลบัญชีนี้จะหายไปจากระบบ",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                }).then((willDelete) => {
-                    if (willDelete) {
-                        $.ajax({
-                            type: "GET",
-                            url: "deleteEmployee.php",
-                            data: {
-                                deleteId: id
-                            },
-                            dataType: "html",
-                            success: function() {
-                                swal('สำเร็จ', 'ท่านได้ลบข้อมูลเรียบร้อยแล้ว', 'success').then(
-                                    function() {
-                                        window.location.href = 'manageemployee.php';
-                                    }
-                                );
-                            }
-                        })
-                    } else {
-
-                    }
-
-
-                });
-            }
-        </script>
     </body>
 
     </html>
+<?php } ?>

@@ -1,6 +1,6 @@
 $( document ).ready(function() {
     
-    setTimeout(function(){ Materialize.toast('Welcome to Employee Leave Management System', 4000) }, 2000);
+    setTimeout(function(){ Materialize.toast('ยินดีต้อนรับเข้าสู่ระบบยืมคืนพัสดุ', 4000) }, 2000);
     
     
     

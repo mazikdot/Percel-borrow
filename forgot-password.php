@@ -1,6 +1,5 @@
 <?php
 session_start();
-error_reporting(0);
 include('includes/config.php');
 // Code for change password 
 if(isset($_POST['change']))
@@ -157,7 +156,7 @@ $msg="คุณได้ทำการเปลี่ยนรหัสผ่�
                         <img src="assets/images/icon-company.jpg" width="50%" height="50%" class="circle" alt="">
                     </div><br>
                     <li class="no-padding"><a class="waves-effect waves-grey" href="index.php"><i
-                                class="material-icons">account_box</i>เข้าสู่ระบบผู้ใช้</a></li>
+                                class="material-icons">account_box</i>เข้าสู่ระบบพนักงาน</a></li>
                     <li class="no-padding"><a class="waves-effect waves-grey" href="forgot-password.php"><i
                                 class="material-icons">account_box</i>ลืมรหัสผ่าน</a></li>
 

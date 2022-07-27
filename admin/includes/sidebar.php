@@ -23,16 +23,16 @@
                         </div>
                     </li>
                     <li class="no-padding">
-                        <a class="collapsible-header waves-effect waves-grey"><i class="material-icons">code</i>ประเภทการลา<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
+                        <a class="collapsible-header waves-effect waves-grey"><i class="material-icons">code</i>จัดการอุปกรณ์<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="addleavetype.php">เพิ่มประเภทการลา</a></li>
-                                <li><a href="manageleavetype.php">ประเภทการลาทั้งหมด</a></li>
+                                <li><a href="addpercel.php">เพิ่มพัสดุ</a></li>
+                                <li><a href="showpercel.php">ดูพัสดุ</a></li>
                             </ul>
                         </div>
                     </li>
                     <li class="no-padding">
-                        <a class="collapsible-header waves-effect waves-grey"><i class="material-icons">account_box</i>พนักงาน<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
+                        <a class="collapsible-header waves-effect waves-grey"><i class="material-icons">account_box</i>จัดการพนักงาน<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
                         <div class="collapsible-body">
                             <ul>
                                 <li><a href="addemployee.php">เพิ่มรายชื่อพนักงาน</a></li>

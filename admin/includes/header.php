@@ -74,7 +74,7 @@
 
 
                                     <span class="badge"><?php echo htmlentities($unreadcount); ?></span></a></li>
-                            <li class="hide-on-med-and-up"><a href="javascript:void(0)" class="search-toggle"><i class="material-icons">search</i></a></li>
+                            <!-- <li class="hide-on-med-and-up"><a href="javascript:void(0)" class="search-toggle"><i class="material-icons">search</i></a></li> -->
                         </ul>
 
                         <ul id="dropdown1" class="dropdown-content notifications-dropdown">

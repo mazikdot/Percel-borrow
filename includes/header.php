@@ -48,7 +48,7 @@
                                 <span class="material-design-hamburger__layer"></span>
                             </a>
                         </section>
-                        <div class="header-title col s4">      
+                        <div class="header-title col s8">      
                             <span class="chapter-title">ระบบยืมคืนพัสดุ</span>
                         </div>
                      

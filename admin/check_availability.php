@@ -30,7 +30,7 @@ $query-> execute();
 $results = $query -> fetchAll(PDO::FETCH_OBJ);
 if($query -> rowCount() > 0)
 {
-echo "<span style='color:red'> Email id already exists .</span>";
+echo "<span style='color:red'> มีการใช้อีเมลนี้อยู่แล้ว</span>";
  echo "<script>$('#add').prop('disabled',true);</script>";
 } else{
 	

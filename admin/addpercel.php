@@ -8,29 +8,32 @@ if (strlen($_SESSION['alogin']) == 0) {
 } else {
     if (isset($_POST['add'])) {
         $PercelName = $_POST['PercelName'];
+        $PercelId = $_POST['PercelId'];
         //Check ว่ามีพัสดุอยู่ในระบบแล้วหรือยัง
 
-        $sql1 = "SELECT * from  tbpercel where PercelName=:PercelName";
+        $sql1 = "SELECT * from  tbpercel where PercelName=:PercelName OR PercelId=:PercelId";
         $query1 = $dbh->prepare($sql1);
+        $query1->bindParam(':PercelId', $PercelId, PDO::PARAM_STR);
         $query1->bindParam(':PercelName', $PercelName, PDO::PARAM_STR);
         $query1->execute();
         $results1 = $query1->fetchAll(PDO::FETCH_ASSOC);
         if(count($results1)){
             echo "<script>
-            swal('ขอภัยค่ะ', 'มีพัสดุชื่อนี้ในระบบอยู่แล้วไม่สามารถเพิ่มซ้ำได้', 'warning').then(
+            swal('ขอภัยค่ะ', 'รหัสหรือชื่อพัสดุซ้ำกัน โปรดตรวจสอบข้อมูลอีกครั้ง', 'warning').then(
                 function() {
                   window.location.href = 'addpercel.php';
                 }
               );
             </script>";
         } else {
-            $sql = "INSERT INTO tbpercel(PercelName) VALUES(:PercelName)";
+            $sql = "INSERT INTO tbpercel(PercelId,PercelName) VALUES(:PercelId,:PercelName)";
             $query = $dbh->prepare($sql);
+            $query->bindParam(':PercelId', $PercelId, PDO::PARAM_STR);
             $query->bindParam(':PercelName', $PercelName, PDO::PARAM_STR);
             $query->execute();
             $lastInsertId = $dbh->lastInsertId();
     
-            if ($lastInsertId) {
+    
                 echo "<script>
             swal('สำเร็จ', 'ท่านได้ทำการเพิ่มพัสดุเรียบร้อยแล้ว', 'success').then(
                 function() {
@@ -38,7 +41,7 @@ if (strlen($_SESSION['alogin']) == 0) {
                 }
               );
             </script>";
-            }
+        
         }
 
        
@@ -113,16 +116,20 @@ if (strlen($_SESSION['alogin']) == 0) {
                         <div class="card-content">
                             <h5>เพิ่มพัสดุ</h5>
                             <div class="row">
-                                <form class="col s12" name="chngpwd" method="post">
+                                <form class="col s12 m12 l12" name="chngpwd" method="post">
                                     <div class="row">
                                       
-                                        <div class="input-field col s12">
+                                        <div class="input-field col l12 s12 m12">
+                                            <input id="PercelId" type="text" class="validate" autocomplete="off" name="PercelId" required>
+                                            <label for="PercelId">รหัสพัสดุ เช่น A</label>
+                                        </div>
+                                        <div class="input-field col l12 m12 s12">
                                             <input id="PercelName" type="text" class="validate" autocomplete="off" name="PercelName" required>
                                             <label for="PercelName">ชื่อพัสดุ เช่น แบบ นั่งร้าน</label>
                                         </div>
 
 
-                                        <div class="input-field col s12">
+                                        <div class="input-field col s12 l12 m12">
                                             <button type="submit" name="add" class="waves-effect waves-light btn indigo m-b-xs">ADD</button>
 
                                         </div>

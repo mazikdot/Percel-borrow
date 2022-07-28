@@ -6,7 +6,7 @@ include('includes/config.php');
 if (strlen($_SESSION['alogin']) == 0) {
     header('location:index.php');
 } else {
-  
+
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -74,38 +74,44 @@ if (strlen($_SESSION['alogin']) == 0) {
         <?php include('includes/sidebar.php'); ?>
         <main class="mn-inner">
             <div class="row">
-               
+
 
                 <div class="col s12 m12 l12">
                     <div class="card">
                         <div class="card-content">
-                            <h5>รายการพัสดุ</h5>
-                            <table id="example" class="display responsive-table ">
+                            <h5 style="text-align:center;">เพิ่ม - ลด จำนวนพัสดุ</h5>
+                            <p style="margin-bottom:20px;">
+                            จำนวนพัสดุแต่ละประเภท จะถูกลดลงโดยอัตโนมัติเมื่อมีการยืมพัสดุ และหน้านี้จะเป็นหน้าพัสดุที่พร้อมใช้งานสามารถทำการ เพิ่ม - ลด จำนวนพัสดุ ได้ให้ตรงตามความต้องการ 
+                            </p>
+                            <table id="example" class="display responsive-table">
                                 <thead>
                                     <tr>
-                                        <th>ลำดับ</th>
-                                        <th>ชื่อ</th>
+                                        <th>รหัส</th>
+                                        <th>พัสดุ</th>
+                                        <th>ประเภท</th>
+                                        <th>จำนวน</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    <?php $sql = "SELECT * from tbpercel";
+                                    <?php $sql = "SELECT a.typePercelAmount,a.TypePercelName,a.TypePercelIdAuto,a.TypePercelId,b.PercelName FROM tbtypepercel as a INNER JOIN tbpercel as b ON a.PercelIdAuto = b.PercelIdAuto;";
                                     $query = $dbh->prepare($sql);
                                     $query->execute();
                                     $results = $query->fetchAll(PDO::FETCH_OBJ);
-                                   
+
                                     if ($query->rowCount() > 0) {
                                         foreach ($results as $result) {               ?>
                                             <tr>
-                                                <td> <?php echo htmlentities($result->PercelId); ?></td>
-                                              
+                                                <td> <?php echo htmlentities($result->TypePercelId); ?></td>
                                                 <td><?php echo htmlentities($result->PercelName); ?></td>
-                                                <td><a href="updatepercel.php?id=<?php echo htmlentities($result->PercelIdAuto); ?>"><i class="material-icons">mode_edit</i></a>
-                                                    <button style="border: none; outline: none; background: none;" onCLick="deletePercel(<?php echo htmlentities($result->PercelIdAuto ); ?>)"><i class="material-icons">delete_forever</i></button>
+                                                <td><?php echo htmlentities($result->TypePercelName); ?></td>
+                                                <td><?php echo htmlentities($result->typePercelAmount); ?></td>
+                                                <td>
+                                                    <a href="updateAmount.php?id=<?php echo $result->TypePercelIdAuto;  ?>"><i class="material-icons">mode_edit</i></a>
                                                 </td>
                                             </tr>
-                                    <?php 
+                                    <?php
                                         }
                                     } ?>
                                 </tbody>
@@ -130,7 +136,7 @@ if (strlen($_SESSION['alogin']) == 0) {
 
 
         <script>
-            deletePercel = (id) => {
+            deleteTypePercel = (id) => {
                 console.log(id);
                 swal({
                     title: "คุณต้องการลบข้อมูลนี้ ใช่หรือไม่",
@@ -142,7 +148,7 @@ if (strlen($_SESSION['alogin']) == 0) {
                     if (willDelete) {
                         $.ajax({
                             type: "GET",
-                            url: "deletePercel.php",
+                            url: "deleteTypePercel.php",
                             data: {
                                 deleteId: id
                             },
@@ -150,7 +156,7 @@ if (strlen($_SESSION['alogin']) == 0) {
                             success: function() {
                                 swal('สำเร็จ', 'ท่านได้ลบข้อมูลเรียบร้อยแล้ว', 'success').then(
                                     function() {
-                                        window.location.href = 'showpercel.php';
+                                        window.location.href = 'showtypepercel.php';
                                     }
                                 );
                             }

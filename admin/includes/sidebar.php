@@ -1,3 +1,4 @@
+     
      <aside id="slide-out" class="side-nav white fixed">
          <div class="side-nav-wrapper">
              <div class="center">
@@ -44,13 +45,14 @@
                  </li>
 
                  <li class="no-padding">
-                     <a class="collapsible-header waves-effect waves-grey"><i class="material-icons">desktop_windows</i>รายการลาพนักงาน<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
+                     <a class="collapsible-header waves-effect waves-grey"><i class="material-icons">desktop_windows</i>อนุมัติพัสดุ<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
                      <div class="collapsible-body">
                          <ul>
-                             <li><a href="leaves.php">รายการลาพนักงานทั้งหมด</a></li>
-                             <li><a href="pending-leavehistory.php" style="color: blue">รอการดำเนินการ</a></li>
-                             <li><a href="approvedleave-history.php" style="color: green">รายการที่อนุมัติ</a></li>
-                             <li><a href="notapproved-leaves.php" style="color: red">รายการที่ไม่อนุมัติ</a></li>
+                             <li><a href="approveall.php">รายการอนุมัติทั้งหมด</a></li>
+                             <li><a href="waitapprove.php" style="color: blue">รอการอนุมัติ</a></li>
+                             <li><a href="approve.php" style="color: green">อนุมัติการเบิก</a></li>
+                             <li><a href="refuseborrow.php" style="color: red">ปฎิเสธการเบิก</a></li>
+                             <li><a href="editstatusall.php"  style="color: white; background-color:#FF99FF;">แก้ไขสถานะการเบิก</a></li>
 
                          </ul>
                      </div>

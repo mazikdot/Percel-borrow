@@ -3,39 +3,48 @@
 <?php
 session_start();
 include('includes/config.php');
+
+//Fetch One Data 
 $id = $_GET['id'];
-$sql = "SELECT a.TypePercelIdAuto,a.TypePercelId,a.TypePercelName,a.typePercelAmount,a.PercelIdAuto,b.PercelName FROM tbtypepercel as a
-INNER JOIN tbpercel as b ON a.PercelIdAuto= b.PercelIdAuto  WHERE TypePercelIdAuto=:id";
+$sql = " SELECT a.BorrowId,a.Work1,a.Work2,a.BorrowAmount,a.BorrowRequest
+,a.BorrowReturn,a.Other,b.StatusBorrowName,c.TypePercelId,c.typePercelAmount
+, c.TypePercelName,d.PercelName FROM tbborrow as a 
+INNER JOIN tbstatusborrow as b ON a.StatusBorrow = b.StatusBorrow 
+INNER JOIN tbtypepercel as c ON a.TypePercelIdAuto = c.TypePercelIdAuto 
+INNER JOIN tbpercel as d ON d.PercelIdAuto = c.PercelIdAuto
+WHERE BorrowId=:id;";
 $query = $dbh->prepare($sql);
 $query->bindParam(':id', $id);
 $query->execute();
-$resultPercel = $query->fetch(PDO::FETCH_ASSOC);
+$resultEdit = $query->fetch(PDO::FETCH_ASSOC);
+// End Fetch One Data
+
 if (strlen($_SESSION['emplogin']) == 0) {
     header('location:index.php');
 } else {
     // Code for change password 
     if (isset($_POST['add'])) {
-        
-        $TypePercelIdAuto = $_GET['id'];
-        $id = $_SESSION['eid'];
-        $StatusBorrow = 1;
-        
+
+
+
         $Work1 = $_POST['Work1'];
         $Work2 = $_POST['Work2'];
         $BorrowAmount = $_POST['BorrowAmount'];
         $BorrowRequest = $_POST['BorrowRequest'];
         $BorrowReturn = $_POST['BorrowReturn'];
         $Other = $_POST['Other'];
-        if($resultPercel['typePercelAmount'] < $BorrowAmount){
+        if ($resultEdit['typePercelAmount'] < $BorrowAmount) {
             echo "<script>
             swal('พัสดุไม่เพียงต่อการยืม', 'โปรดตรวจสอบจำนวนการยืมอีกครั้ง', 'warning').then(
                 function() {
-                  window.location.href = 'listpercel.php';
+                  window.location.href = 'listhistory.php';
                 }
               );
             </script>";
         } else {
-            $sql = "INSERT INTO tbborrow(Work1,Work2,BorrowAmount,BorrowRequest,BorrowReturn,Other,id,TypePercelIdAuto,StatusBorrow) VALUES(:Work1,:Work2,:BorrowAmount,:BorrowRequest,:BorrowReturn,:Other,:id,:TypePercelIdAuto,:StatusBorrow)";
+            $sql = "update tbborrow set Work1=:Work1,Work2=:Work2,BorrowAmount=:BorrowAmount
+            ,BorrowRequest=:BorrowRequest,BorrowReturn=:BorrowReturn,Other=:Other
+            ";
             $query = $dbh->prepare($sql);
             $query->bindParam(':Work1', $Work1, PDO::PARAM_STR);
             $query->bindParam(':Work2', $Work2, PDO::PARAM_STR);
@@ -43,24 +52,18 @@ if (strlen($_SESSION['emplogin']) == 0) {
             $query->bindParam(':BorrowRequest', $BorrowRequest, PDO::PARAM_STR);
             $query->bindParam(':BorrowReturn', $BorrowReturn, PDO::PARAM_STR);
             $query->bindParam(':Other', $Other, PDO::PARAM_STR);
-            $query->bindParam(':id', $id, PDO::PARAM_STR);
-            $query->bindParam(':TypePercelIdAuto', $TypePercelIdAuto, PDO::PARAM_STR);
-            $query->bindParam(':StatusBorrow', $StatusBorrow, PDO::PARAM_STR);
             $query->execute();
-            if($query){
+            if ($query) {
                 echo "<script>
-                swal('ทำการยืมพัสดุเรียบร้อยแล้ว', 'โปรดติดตามสถานะในหน้าประวัติการยืม', 'success').then(
+                swal('สำเร็จ', 'ท่านได้ทำการแก้ไขข้อมูลการยืมเรียบร้อยแล้ว', 'success').then(
                     function() {
-                      window.location.href = 'listpercel.php';
+                      window.location.href = 'listhistory.php';
                     }
                   );
                 </script>";
             }
         }
-       
     }
-
-   
 }
 ?>
 
@@ -132,105 +135,57 @@ if (strlen($_SESSION['emplogin']) == 0) {
             <div class="col s12 m12 l12">
                 <div class="card">
                     <div class="card-content">
-                        <h5 style="text-align:center;">ข้อมูลพัสดุที่ต้องการยืม</h5>
+                        <h5 style="text-align:center;">แก้ไขรายละเอียดการยืม</h5>
 
-                        <p style="text-align:center; color:red;">หลังจากการยืมรอแอดมิน ยืนยันสถานะผ่านการอนุมัติ</p>
                         <br>
-                        <!-- -------------------------เริ่มข้อมูลพัสดุที่ต้องการยืม---------------------------------- -->
+
                         <div class="row" style="border:solid; border-width:1.5px;">
-                            <h5 style="text-align:center">รายละเอียดพัสดุ</h5>
-                            <form class="col s12 m12 l12" name="chngpwd" method="post">
+                            <form class="col s12 m12 l12" style="margin-top:20px;" name="chngpwd" method="post">
                                 <div class="row">
-                                    <?php
-                                    $sqlPer = "SELECT * from  tbpercel";
-                                    $queryPer = $dbh->prepare($sqlPer);
-                                    $queryPer->execute();
 
-                                    ?>
-                                    <div class="input-field col l12 s12 m12">
-                                        <p><?php echo $resultPercel['PercelName'];  ?></p>
-                                        <hr>
-                                    </div>
-
-                                    <div class="input-field col l12 s12 m12">
-                                        <p><?php echo $resultPercel['TypePercelId'];  ?></p>
-                                        <hr>
-                                    </div>
-                                    <div class="input-field col l12 s12 m12">
-                                        <p><?php echo $resultPercel['TypePercelName'];  ?></p>
-                                        <hr>
-                                    </div>
-                                    <div class="col l12 s12 m12" style="margin-top:20px;">
-                                        <label>จำนวนพัสดุที่มีอยู่สามารถยืมได้</label>
-                                    </div>
-                                    <div class="input-field col l12 s12 m12">
-                                        <p><?php echo $resultPercel['typePercelAmount'];  ?></p>
-                                        <hr>
-                                    </div>
-
-
-
-
-
-
-                                </div>
-
-                            </form>
-                        </div>
-                        <!-- ------------------ จบข้อมูลพัสดุที่ต้องการยืม ----------------------------- -->
-                        <div class="row" style="border:solid; border-width:1.5px;">
-                            <h5 style="text-align:center">กรอกข้อมูลเพื่อยืมพัสดุ</h5>
-                            <form class="col s12 m12 l12" name="chngpwd" method="post">
-                                <div class="row">
-                                    <?php
-                                    $sqlPer = "SELECT * from  tbpercel";
-                                    $queryPer = $dbh->prepare($sqlPer);
-                                    $queryPer->execute();
-
-                                    ?>
 
                                     <div class="col l12 s12 m12">
                                         หน้างานที่ต้องการยืม
                                     </div>
                                     <div class="input-field col l12 s12 m12">
 
-                                        <input id="Work1" type="text" class="validate" autocomplete="off" name="Work1" required>
+                                        <input id="Work1" value="<?php echo $resultEdit['Work1']; ?>" type="text" class="validate" autocomplete="off" name="Work1" required>
                                     </div>
                                     <div class="col l12 s12 m12">
                                         ไปยัง
                                     </div>
                                     <div class="input-field col l12 s12 m12">
-                                        <input id="Work2" type="text" class="validate" autocomplete="off" name="Work2" required>
+                                        <input id="Work2" type="text" value="<?php echo $resultEdit['Work2']; ?>" class="validate" autocomplete="off" name="Work2" required>
                                     </div>
                                     <div class="col l12 s12 m12">
                                         จำนวนที่ต้องการยืม
                                     </div>
                                     <div class="input-field col l12 s12 m12">
-                                        <input id="BorrowAmount" type="number" class="validate" autocomplete="off" name="BorrowAmount" required>
+                                        <input id="BorrowAmount" type="number" value="<?php echo $resultEdit['BorrowAmount']; ?>" class="validate" autocomplete="off" name="BorrowAmount" required>
                                     </div>
                                     <div class="col l12 s12 m12">
                                         วันที่ขอยืม
                                     </div>
                                     <div class="input-field col l12 s12 m12">
-                                        <input id="BorrowRequest" type="date" class="validate" autocomplete="off" name="BorrowRequest" required>
+                                        <input id="BorrowRequest" type="date" value="<?php echo $resultEdit['BorrowRequest']; ?>" class="validate" autocomplete="off" name="BorrowRequest" required>
                                     </div>
                                     <div class="col l12 s12 m12">
                                         วันที่คืน
                                     </div>
                                     <div class="input-field col l12 s12 m12">
-                                        <input id="BorrowReturn" type="date" class="validate" autocomplete="off" name="BorrowReturn" required>
+                                        <input id="BorrowReturn" type="date" value="<?php echo $resultEdit['BorrowReturn']; ?>" class="validate" autocomplete="off" name="BorrowReturn" required>
                                     </div>
                                     <div class="col l12 s12 m12">
                                         รายละเอียดอื่น ๆ ข้อมูลเพิ่มเติมสามารถระบุได้ (หากมี)
                                     </div>
                                     <div class="input-field col l12 s12 m12">
-                                        <input id="Other" type="text" class="validate" autocomplete="off" name="Other" required>
+                                        <input id="Other" type="text" class="validate" value="<?php echo $resultEdit['Other']; ?>" autocomplete="off" name="Other" required>
                                     </div>
 
 
 
                                     <div class="input-field col s12">
-                                        <button type="submit" name="add" class="waves-effect waves-light btn indigo m-b-xs">ยืมพัสดุ</button>
+                                        <button type="submit" name="add" class="waves-effect waves-light btn indigo m-b-xs">แก้ไข</button>
 
                                     </div>
 

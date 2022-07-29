@@ -135,7 +135,7 @@ if (strlen($_SESSION['alogin']) == 0) {
                                         <input id="TypePercelName" type="text" class="validate" autocomplete="off" name="TypePercelName" value="<?php echo $resultPercel['TypePercelName'];  ?>" required disabled>
                                     </div>
                                     <div class="input-field col l12 s12 m12">
-                                        <input id="typePercelAmount" type="text" class="validate" autocomplete="off" name="typePercelAmount" value="<?php echo $resultPercel['typePercelAmount'];  ?>" required>
+                                        <input id="typePercelAmount" type="number" class="validate" autocomplete="off" name="typePercelAmount" value="<?php echo $resultPercel['typePercelAmount'];  ?>" required>
                                     </div>
 
                                     <div class="input-field col s12">

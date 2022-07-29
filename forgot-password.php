@@ -2,17 +2,16 @@
 session_start();
 include('includes/config.php');
 // Code for change password 
-if(isset($_POST['change']))
-    {
-$newpassword=md5($_POST['newpassword']);
-$empid=$_SESSION['empid'];
+if (isset($_POST['change'])) {
+    $newpassword = md5($_POST['newpassword']);
+    $empid = $_SESSION['empid'];
 
-$con="update tblemployees set Password=:newpassword where id=:empid";
-$chngpwd1 = $dbh->prepare($con);
-$chngpwd1-> bindParam(':empid', $empid, PDO::PARAM_STR);
-$chngpwd1-> bindParam(':newpassword', $newpassword, PDO::PARAM_STR);
-$chngpwd1->execute();
-$msg="คุณได้ทำการเปลี่ยนรหัสผ่านแล้ว";
+    $con = "update tblemployees set Password=:newpassword where id=:empid";
+    $chngpwd1 = $dbh->prepare($con);
+    $chngpwd1->bindParam(':empid', $empid, PDO::PARAM_STR);
+    $chngpwd1->bindParam(':newpassword', $newpassword, PDO::PARAM_STR);
+    $chngpwd1->execute();
+    $msg = "คุณได้ทำการเปลี่ยนรหัสผ่านแล้ว";
 }
 
 ?>
@@ -40,23 +39,23 @@ $msg="คุณได้ทำการเปลี่ยนรหัสผ่�
     <link href="assets/css/alpha.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/custom.css" rel="stylesheet" type="text/css" />
     <style>
-    .errorWrap {
-        padding: 10px;
-        margin: 0 0 20px 0;
-        background: #fff;
-        border-left: 4px solid #dd3d36;
-        -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-    }
+        .errorWrap {
+            padding: 10px;
+            margin: 0 0 20px 0;
+            background: #fff;
+            border-left: 4px solid #dd3d36;
+            -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
+            box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
+        }
 
-    .succWrap {
-        padding: 10px;
-        margin: 0 0 20px 0;
-        background: #fff;
-        border-left: 4px solid #5cb85c;
-        -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-    }
+        .succWrap {
+            padding: 10px;
+            margin: 0 0 20px 0;
+            background: #fff;
+            border-left: 4px solid #5cb85c;
+            -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
+            box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
+        }
     </style>
 
     <!-- font -->
@@ -64,12 +63,12 @@ $msg="คุณได้ทำการเปลี่ยนรหัสผ่�
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped&display=swap" rel="stylesheet">
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped&display=swap');
     </style>
     <style>
-    body {
-        font-family: 'IBM Plex Sans Thai Looped', sans-serif;
-    }
+        body {
+            font-family: 'IBM Plex Sans Thai Looped', sans-serif;
+        }
     </style>
 
     <!-- icon -->
@@ -131,8 +130,7 @@ $msg="คุณได้ทำการเปลี่ยนรหัสผ่�
             <nav class="cyan darken-1">
                 <div class="nav-wrapper row">
                     <section class="material-design-hamburger navigation-toggle">
-                        <a href="#" data-activates="slide-out"
-                            class="button-collapse show-on-large material-design-hamburger__icon">
+                        <a href="#" data-activates="slide-out" class="button-collapse show-on-large material-design-hamburger__icon">
                             <span class="material-design-hamburger__layer"></span>
                         </a>
                     </section>
@@ -155,20 +153,17 @@ $msg="คุณได้ทำการเปลี่ยนรหัสผ่�
                     <div class="center">
                         <img src="assets/images/icon-company.jpg" width="50%" height="50%" class="circle" alt="">
                     </div><br>
-                    <li class="no-padding"><a class="waves-effect waves-grey" href="index.php"><i
-                                class="material-icons">account_box</i>เข้าสู่ระบบพนักงาน</a></li>
-                    <li class="no-padding"><a class="waves-effect waves-grey" href="forgot-password.php"><i
-                                class="material-icons">account_box</i>ลืมรหัสผ่าน</a></li>
+                    <li class="no-padding"><a class="waves-effect waves-grey" href="index.php"><i class="material-icons">account_box</i>เข้าสู่ระบบพนักงาน</a></li>
+                    <li class="no-padding"><a class="waves-effect waves-grey" href="forgot-password.php"><i class="material-icons">account_box</i>ลืมรหัสผ่าน</a></li>
 
-                    <li class="no-padding"><a class="waves-effect waves-grey" href="admin/"><i
-                                class="material-icons">account_box</i>เข้าสู่ระบบผู้ดูแล</a></li>
+                    <li class="no-padding"><a class="waves-effect waves-grey" href="admin/"><i class="material-icons">account_box</i>เข้าสู่ระบบผู้ดูแล</a></li>
 
                 </ul>
             </div>
         </aside>
 
         <main class="mn-inner">
-        <br><br><br><br>
+            <br><br><br><br>
             <div class="center">
                 <div class="col s12">
                     <div>
@@ -183,75 +178,66 @@ $msg="คุณได้ทำการเปลี่ยนรหัสผ่�
                             <div class="center">
                                 <span class="card-title" style="font-size:20px;">Employee details</span>
                             </div>
-                            <?php if($msg){?><div class="succWrap"><strong>Success </strong> :
-                                <?php echo htmlentities($msg); ?> </div><?php }?>
+                            <?php if ($msg) { ?><div class="succWrap"><strong>Success </strong> :
+                                    <?php echo htmlentities($msg); ?> </div><?php } ?>
                             <div class="row">
                                 <form class="col s12" name="signin" method="post">
                                     <div class="input-field col s12">
-                                        <input id="empid" type="text" name="empid" class="validate" autocomplete="off"
-                                            required>
+                                        <input id="empid" type="text" name="empid" class="validate" autocomplete="off" required>
                                         <label for="email">Employee Id</label>
                                     </div>
                                     <div class="input-field col s12">
-                                        <input id="password" type="text" class="validate" name="emailid"
-                                            autocomplete="off" required>
+                                        <input id="password" type="text" class="validate" name="emailid" autocomplete="off" required>
                                         <label for="password">Email</label>
                                     </div>
                                     <div class="col s12 right-align m-t-sm">
 
-                                        <input type="submit" name="submit" value="Sign in"
-                                            class="waves-effect waves-light btn teal">
+                                        <input type="submit" name="submit" value="Sign in" class="waves-effect waves-light btn teal">
                                     </div>
                                 </form>
                             </div>
                         </div>
-                        <?php if(isset($_POST['submit']))
-{
-$empid=$_POST['empid'];
-$email=$_POST['emailid'];
-$sql ="SELECT id FROM tblemployees WHERE EmailId=:email and EmpId=:empid";
-$query= $dbh -> prepare($sql);
-$query-> bindParam(':email', $email, PDO::PARAM_STR);
-$query-> bindParam(':empid', $empid, PDO::PARAM_STR);
-$query-> execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
-if($query->rowCount() > 0)
-{
-foreach ($results as $result) {
-    $_SESSION['empid']=$result->id;
-  } 
-    ?>
+                        <?php if (isset($_POST['submit'])) {
+                            $empid = $_POST['empid'];
+                            $email = $_POST['emailid'];
+                            $sql = "SELECT id FROM tblemployees WHERE EmailId=:email and EmpId=:empid";
+                            $query = $dbh->prepare($sql);
+                            $query->bindParam(':email', $email, PDO::PARAM_STR);
+                            $query->bindParam(':empid', $empid, PDO::PARAM_STR);
+                            $query->execute();
+                            $results = $query->fetchAll(PDO::FETCH_OBJ);
+                            if ($query->rowCount() > 0) {
+                                foreach ($results as $result) {
+                                    $_SESSION['empid'] = $result->id;
+                                }
+                        ?>
 
-                        <div class="row">
-                            <span class="card-title" style="font-size:20px;">ทำรายการเปลี่ยนรหัสผ่านใหม่</span>
-                            <form class="col s12" name="udatepwd" method="post">
-                                <div class="input-field col s12">
-                                    <input id="password" type="password" name="newpassword" class="validate"
-                                        autocomplete="off" required>
-                                    <label for="password">New Password</label>
+                                <div class="row">
+                                    <span class="card-title" style="font-size:20px;">ทำรายการเปลี่ยนรหัสผ่านใหม่</span>
+                                    <form class="col s12" name="udatepwd" method="post">
+                                        <div class="input-field col s12">
+                                            <input id="password" type="password" name="newpassword" class="validate" autocomplete="off" required>
+                                            <label for="password">New Password</label>
+                                        </div>
+
+                                        <div class="input-field col s12">
+                                            <input id="password" type="password" name="confirmpassword" class="validate" autocomplete="off" required>
+                                            <label for="password">Confirm Password</label>
+                                        </div>
+
+
+                                        <div class="input-field col s12">
+                                            <button type="submit" name="change" class="waves-effect waves-light btn indigo m-b-xs" onclick="return valid();">Change</button>
+
+                                        </div>
                                 </div>
-
-                                <div class="input-field col s12">
-                                    <input id="password" type="password" name="confirmpassword" class="validate"
-                                        autocomplete="off" required>
-                                    <label for="password">Confirm Password</label>
+                                </form>
+                            <?php } else { ?>
+                                <div class="errorWrap" style="margin-left: 2%; font-size:22px;">
+                                    <strong>ERROR</strong> : <?php echo htmlentities("Invalid details");
+                                                            } ?>
                                 </div>
-
-
-                                <div class="input-field col s12">
-                                    <button type="submit" name="change"
-                                        class="waves-effect waves-light btn indigo m-b-xs"
-                                        onclick="return valid();">Change</button>
-
-                                </div>
-                        </div>
-                        </form>
-                        <?php } else{ ?>
-                        <div class="errorWrap" style="margin-left: 2%; font-size:22px;">
-                            <strong>ERROR</strong> : <?php echo htmlentities("Invalid details");
-}?>
-                        </div>
-                        <?php } ?>
+                            <?php } ?>
 
 
 

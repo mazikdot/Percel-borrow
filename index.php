@@ -173,8 +173,6 @@ swal('รหัสผ่านไม่ถูกต้อง', 'โปรดต�
                         <img width="50%;" height="50%" src="assets/images/icon-company.jpg" class="circle" alt="">
                     </div><br>
                     <li class="no-padding"><a class="waves-effect waves-grey" href="index.php"><i class="material-icons">account_box</i>เข้าสู่ระบบพนักงาน</a></li>
-                    <li class="no-padding"><a class="waves-effect waves-grey" href="forgot-password.php"><i class="material-icons">account_box</i>ลืมรหัสผ่าน</a></li>
-
                     <li class="no-padding"><a class="waves-effect waves-grey" href="admin/"><i class="material-icons">account_box</i>เข้าสู่ระบบผู้ดูแล</a></li>
 
                 </ul>

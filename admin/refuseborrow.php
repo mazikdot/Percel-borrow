@@ -88,7 +88,7 @@ if (strlen($_SESSION['alogin']) == 0) {
                                         <th width="350">พัสดุที่ยืม</th>
                                         <th width="180">วันที่ยืม - คืน</th>
                                         <th width="180">ข้อมูลผู้ยืม</th>
-                                        <th width="100">จำนวนที่จะยืม</th>
+                                        <th width="100">จำนวนที่ยืม</th>
                                         <th width="100">สถานะ</th>
                                     </tr>
                                 </thead>

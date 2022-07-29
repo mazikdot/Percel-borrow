@@ -1,3 +1,5 @@
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<srcript src="https://code.jquery.com/jquery-3.6.0.min.js"></srcript>
 <?php
 session_start();
 include('includes/config.php');
@@ -89,14 +91,14 @@ if (strlen($_SESSION['alogin']) == 0) {
                                         <th width="300">พัสดุที่ยืม</th>
                                         <th width="180">วันที่ยืม - คืน</th>
                                         <th width="180">ข้อมูลผู้ยืม</th>
-                                        <th width="100">จำนวนที่จะยืม</th>
+                                        <th width="100">จำนวนที่ยืม</th>
                                         <th width="180">สถานะ</th>
                                         <th width="50">EDIT</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    <?php $sql = "    SELECT a.BorrowId,a.Work1,a.Work2,a.BorrowAmount,a.BorrowRequest
+                                    <?php $sql = "SELECT a.BorrowId,a.Work1,a.Work2,a.BorrowAmount,a.BorrowRequest
                                 ,a.BorrowReturn,a.Other,b.StatusBorrowName,c.TypePercelId,a.StatusBorrow,
                                 e.FirstName,e.LastName,e.Phonenumber,a.TimeRequest,c.typePercelAmount,a.NoteBorrow
                                 , c.TypePercelName,d.PercelName FROM tbborrow as a 
@@ -144,8 +146,9 @@ if (strlen($_SESSION['alogin']) == 0) {
                                                 </td>
                                                 <td>
                                                     <?php if ($result['StatusBorrowName'] != 'อนุมัติการเบิก') { ?>
-                                                        <a style="background-color:aqua; color:black;" href="updatestatusborrow.php?BorrowId=<?php echo $result['BorrowId']; ?>" class="btn btn-info">EDIT</a>
+                                                        <a style="background-color:blue; color:white;" href="updatestatusborrow.php?BorrowId=<?php echo $result['BorrowId']; ?>" class="btn btn-info">EDIT</a>
                                                     <?php } ?>
+                                                        <button class="btn btn-danger" onCLick="deleteBorrowAdmin(<?php echo htmlentities($result['BorrowId']); ?>)">DELETE</button>
                                                 </td>
                                             </tr>
                                     <?php $cnt++;
@@ -173,6 +176,41 @@ if (strlen($_SESSION['alogin']) == 0) {
         <script src="assets/js/pages/ui-modals.js"></script>
         <script src="assets/plugins/google-code-prettify/prettify.js"></script>
 
+
+        <script>
+            deleteBorrowAdmin = (id) => {
+          
+                swal({
+                    title: "คุณต้องการลบข้อมูลนี้ ใช่หรือไม่",
+                    text: "หากทำการลบข้อมูลนี้ประวัติขอเบิกหน้าผู้ใช้ก็จะหายไปด้วย",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            type: "GET",
+                            url: "deleteborrowadmin.php",
+                            data: {
+                                deleteId: id
+                            },
+                            dataType: "html",
+                            success: function() {
+                                swal('สำเร็จ', 'ท่านได้ลบข้อมูลเรียบร้อยแล้ว', 'success').then(
+                                    function() {
+                                        window.location.href = 'editstatusall.php';
+                                    }
+                                );
+                            }
+                        })
+                    } else {
+
+                    }
+
+
+                });
+            }
+        </script>
     </body>
 
     </html>

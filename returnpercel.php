@@ -7,7 +7,7 @@ if (strlen($_SESSION['emplogin']) == 0) {
     header('location:index.php');
 } else {
     // Code for change password 
-    
+
 }
 ?>
 
@@ -107,7 +107,7 @@ if (strlen($_SESSION['emplogin']) == 0) {
                                 INNER JOIN tbstatusborrow as b ON a.StatusBorrow = b.StatusBorrow 
                                 INNER JOIN tbtypepercel as c ON a.TypePercelIdAuto = c.TypePercelIdAuto 
                                 INNER JOIN tbpercel as d ON d.PercelIdAuto = c.PercelIdAuto
-                                WHERE id=:id AND b.StatusBorrowName = 'อนุมัติการเบิก';
+                                WHERE id=:id AND b.StatusBorrowName = 'อนุมัติการเบิก' AND a.BorrowAmount != 0;
                                 ;
                             
                                 ";
@@ -145,7 +145,7 @@ if (strlen($_SESSION['emplogin']) == 0) {
 
                                             </td>
                                             <td>
-                                                <a class="btn btn-danger" href="edithistory.php?id=<?php echo $result->BorrowId ?>">คืน</a>
+                                                <a class="btn btn-danger" href="returnamountpercell.php?id=<?php echo $result->BorrowId ?>">คืน</a>
                                             </td>
 
                                         </tr>

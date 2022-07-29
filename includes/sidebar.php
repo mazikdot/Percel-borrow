@@ -30,8 +30,9 @@
 
                  <li class="no-padding"><a class="waves-effect waves-grey" href="myprofile.php"><i class="material-icons">account_box</i>My Profiles</a></li>
                  <li class="no-padding"><a class="waves-effect waves-grey" href="listpercel.php"><i class="material-icons">settings_input_svideo</i>ยืมพัสดุ</a></li>
-                 <li class="no-padding"><a class="waves-effect waves-grey" href="listhistory.php"><i class="material-icons">settings_input_svideo</i>ติดตามสถานะการอนุมัติ</a></li>
-                 <li class="no-padding"><a class="waves-effect waves-grey" href="returnpercel.php"><i class="material-icons">settings_input_svideo</i>ส่งคืนพัสดุ</a></li>
+                 <li class="no-padding"><a class="waves-effect waves-grey" href="listhistory.php"><i class="material-icons">settings_input_svideo</i>สถานะการอนุมัติ</a></li>
+                 <li class="no-padding"><a class="waves-effect waves-grey" href="returnpercel.php"><i class="material-icons">settings_input_svideo</i>รอส่งคืน</a></li>
+                 <li class="no-padding"><a class="waves-effect waves-grey" href="returnpercel.php"><i class="material-icons">settings_input_svideo</i>ส่งคืนสำเร็จ</a></li>
                  <li class="no-padding"><a class="waves-effect waves-grey" href="emp-changepassword.php"><i class="material-icons">settings_input_svideo</i>Change Password</a></li>
 
                  

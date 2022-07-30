@@ -42,7 +42,7 @@ if (strlen($_SESSION['alogin']) == 0) {
         echo "<script>
         swal('สำเร็จ', 'ท่านได้ทำการคืนพัสดุเรียบร้อยแล้ว', 'success').then(
             function() {
-              window.location.href = 'returnpercel.php';
+              window.location.href = 'waitpercel.php';
             }
           );
         </script>";

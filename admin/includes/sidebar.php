@@ -57,7 +57,7 @@
                                     $queryCount1->execute();
                                     $resultsCount1 = $queryCount1->fetch(PDO::FETCH_ASSOC);
                                     if ($resultsCount1['StatusBorrow'] > 0) { ?>
-                                        <span style="background-color:blue; color:white;" class="badge"><?php echo $resultsCount1['StatusBorrow']; ?></span>
+                                        <span style="border-radius: 50%; background-color:blue; color:white;" class="badge"><?php echo $resultsCount1['StatusBorrow']; ?></span>
                                     <?php }
                                     ?>
                                 </a></li>
@@ -73,7 +73,7 @@
                                     $queryCount2->execute();
                                     $resultsCount2 = $queryCount2->fetch(PDO::FETCH_ASSOC);
                                     if ($resultsCount2['StatusBorrow'] > 0) { ?>
-                                        <span style="background-color:green; color:white;" class="badge"><?php echo $resultsCount2['StatusBorrow']; ?></span>
+                                        <span style="border-radius: 50%; background-color:green; color:white;" class="badge"><?php echo $resultsCount2['StatusBorrow']; ?></span>
                                     <?php } ?>
                                 </a>
 
@@ -87,7 +87,7 @@
                                     $queryCount3->execute();
                                     $resultsCount3 = $queryCount3->fetch(PDO::FETCH_ASSOC);
                                     if ($resultsCount3['StatusBorrow'] > 0) { ?>
-                                        <span style="background-color:red; color:white;" class="badge"><?php echo $resultsCount3['StatusBorrow']; ?></span>
+                                        <span style="border-radius: 50%; background-color:red; color:white;" class="badge"><?php echo $resultsCount3['StatusBorrow']; ?></span>
                                     <?php } ?>
 
                                 </a></li>
@@ -101,9 +101,31 @@
                     <a class="collapsible-header waves-effect waves-grey"><i class="material-icons">account_box</i>สถานะยืม - คืน<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
                     <div class="collapsible-body">
                         <ul>
-                            <li><a href="waitpercel.php">รอการคืนพัสดุ</a></li>
+                            <li><a href="waitpercel.php">รอการคืนพัสดุ
+                                    <?php
+
+                                    //นับจำนวนสถานะรอการอนุมัติ
+                                    $sqlCount4 = "SELECT COUNT(StatusBorrow) as StatusBorrow FROM tbborrow WHERE StatusBorrow = 2 AND BorrowAmount > 0";
+                                    $queryCount4 = $dbh->prepare($sqlCount4);
+                                    $queryCount4->execute();
+                                    $resultsCount4 = $queryCount4->fetch(PDO::FETCH_ASSOC);
+                                    if ($resultsCount4['StatusBorrow'] > 0) { ?>
+                                        <span style="border-radius: 50%; background-color:blue; color:white;" class="badge"><?php echo $resultsCount4['StatusBorrow']; ?></span>
+                                    <?php }
+                                    ?>
+
+                                </a></li>
                             <li><a href="refusesuccess.php">คืนพัสดุสำเร็จ</a></li>
 
+                        </ul>
+                    </div>
+                </li>
+                <li class="no-padding">
+                    <a class="collapsible-header waves-effect waves-grey"><i class="material-icons">account_box</i>พิมพ์เอกสาร<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li><a href="printdoc.php">ข้อมูลการยืมพัสดุ
+                                </a></li>
                         </ul>
                     </div>
                 </li>

@@ -1,0 +1,50 @@
+* {
+    size: A4;
+    margin: 0;
+    padding: 0;
+  }
+  .container {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .date {
+    text-align: right;
+    margin-right: 150px;
+  }
+  .info {
+    text-align: left;
+    margin-left: 100px;
+  }
+  table,
+  th,
+  td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+  table {
+    margin: 0 auto;
+  }
+  
+  td {
+    text-align: left;
+  }
+  
+  .price {
+    text-align: right;
+  }
+  
+  .center {
+    margin: 10px 10px;
+  }
+  
+  pre {
+    font-size: 14px;
+  }
+  
+  th {
+    font-size: 14px;
+  }
+  
+  

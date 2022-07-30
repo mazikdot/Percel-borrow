@@ -1,3 +1,5 @@
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<srcript src="https://code.jquery.com/jquery-3.6.0.min.js"></srcript>
 <?php
 session_start();
 include('includes/config.php');
@@ -79,7 +81,7 @@ if (strlen($_SESSION['alogin']) == 0) {
                 <div class="col s12 m12 l12">
                     <div class="card">
                         <div class="card-content">
-                            <h5 style="text-align:center; color:red;">พัสดุที่ฉันส่งคืนสำเร็จ</h5>
+                            <h5 style="text-align:center; color:red;">ประวัติการส่งคืนพัสดุทั้งหมด</h5>
                             <table id="example" class="display responsive-table">
                                 <thead>
                                     <tr>
@@ -90,6 +92,7 @@ if (strlen($_SESSION['alogin']) == 0) {
                                         <th>วันที่ยืม</th>
                                         <th>วันครบกำหนดยืม</th>
                                         <th>สถานะ</th>
+                                        <th>ลบ</th>
                                     </tr>
                                 </thead>
 
@@ -124,8 +127,7 @@ if (strlen($_SESSION['alogin']) == 0) {
                                                 <td>
                                                     <span style="color:green;">ส่งคืนสำเร็จ</span>
                                                 </td>
-
-
+                                                <td><button style="background-color:red;" onCLick="deleteHistory(<?php echo htmlentities($result->BorrowId); ?>)" class="btn btn-danger">ลบ</button></td>
                                             </tr>
                                     <?php
                                         }
@@ -152,7 +154,39 @@ if (strlen($_SESSION['alogin']) == 0) {
         <script src="../assets/js/pages/table-data.js"></script>
         <script src="assets/js/pages/ui-modals.js"></script>
         <script src="assets/plugins/google-code-prettify/prettify.js"></script>
+        <script>
+            deleteHistory = (id) => {
+                swal({
+                    title: "คุณต้องการลบประวัตินี้ ใช่หรือไม่",
+                    text: "หากทำการลบประวัตินี้จะหายไปทั้งแอดมิน และผู้ใช้",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            type: "GET",
+                            url: "deletehistory.php",
+                            data: {
+                                deleteId: id
+                            },
+                            dataType: "html",
+                            success: function() {
+                                swal('สำเร็จ', 'ท่านได้ลบข้อมูลเรียบร้อยแล้ว', 'success').then(
+                                    function() {
+                                        window.location.href = 'refusesuccess.php';
+                                    }
+                                );
+                            }
+                        })
+                    } else {
 
+                    }
+
+
+                });
+            }
+        </script>
     </body>
 
     </html>

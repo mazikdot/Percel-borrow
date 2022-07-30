@@ -10,7 +10,7 @@
                      <div class="sidebar-profile-info">
                          <?php
                             $eid = $_SESSION['eid'];
-                            $sql = "SELECT FirstName,LastName,EmpId from  tblemployees where id=:eid";
+                            $sql = "SELECT FirstName,LastName from  tblemployees where id=:eid";
                             $query = $dbh->prepare($sql);
                             $query->bindParam(':eid', $eid, PDO::PARAM_STR);
                             $query->execute();
@@ -19,7 +19,6 @@
                             if ($query->rowCount() > 0) {
                                 foreach ($results as $result) {               ?>
                                  <p><?php echo htmlentities($result->FirstName . " " . $result->LastName); ?></p>
-                                 <span><?php echo htmlentities($result->EmpId) ?></span>
                          <?php }
                             } ?>
                      </div>
@@ -30,12 +29,39 @@
 
                  <li class="no-padding"><a class="waves-effect waves-grey" href="myprofile.php"><i class="material-icons">account_box</i>My Profiles</a></li>
                  <li class="no-padding"><a class="waves-effect waves-grey" href="listpercel.php"><i class="material-icons">settings_input_svideo</i>ยืมพัสดุ</a></li>
-                 <li class="no-padding"><a class="waves-effect waves-grey" href="listhistory.php"><i class="material-icons">settings_input_svideo</i>สถานะการอนุมัติ</a></li>
-                 <li class="no-padding"><a class="waves-effect waves-grey" href="returnpercel.php"><i class="material-icons">settings_input_svideo</i>รอส่งคืน</a></li>
+                 <li class="no-padding"><a class="waves-effect waves-grey" href="listhistory.php"><i class="material-icons">settings_input_svideo</i>สถานะการอนุมัติ
+                 <?php
+                            //นับจำนวนสถานะรอการอนุมัติ
+                            $id=$_SESSION['eid'];
+                            $sqlCount2 = "SELECT COUNT(StatusBorrow) as StatusBorrow FROM tbborrow WHERE StatusBorrow = 1 AND BorrowAmount > 0 AND id=:id";
+                            $queryCount2 = $dbh->prepare($sqlCount2);
+                            $queryCount2->bindParam(':id', $id);
+                            $queryCount2->execute();
+                            $resultsCount2 = $queryCount2->fetch(PDO::FETCH_ASSOC);
+                            if ($resultsCount2['StatusBorrow'] > 0) { ?>
+                             <span style="border-radius: 50%; background-color:burlywood; color:white;" class="badge"><?php echo $resultsCount2['StatusBorrow']; ?></span>
+                         <?php }
+                            ?>
+
+                </a></li>
+                 <li class="no-padding"><a class="waves-effect waves-grey" href="returnpercel.php"><i class="material-icons">settings_input_svideo</i>รอส่งคืน
+                         <?php
+                            //นับจำนวนสถานะรอการอนุมัติ
+                            $sqlCount1 = "SELECT COUNT(StatusBorrow) as StatusBorrow FROM tbborrow WHERE StatusBorrow = 2 AND BorrowAmount > 0 AND id=:id";
+                            $queryCount1 = $dbh->prepare($sqlCount1);
+                            $queryCount1->bindParam(':id', $id);
+                            $queryCount1->execute();
+                            $resultsCount1 = $queryCount1->fetch(PDO::FETCH_ASSOC);
+                            if ($resultsCount1['StatusBorrow'] > 0) { ?>
+                             <span style="border-radius: 50%; background-color:red; color:white;" class="badge"><?php echo $resultsCount1['StatusBorrow']; ?></span>
+                         <?php }
+                            ?>
+
+                     </a></li>
                  <li class="no-padding"><a class="waves-effect waves-grey" href="returnpercellsuccess.php"><i class="material-icons">settings_input_svideo</i>ส่งคืนสำเร็จ</a></li>
                  <li class="no-padding"><a class="waves-effect waves-grey" href="emp-changepassword.php"><i class="material-icons">settings_input_svideo</i>Change Password</a></li>
 
-                 
+
 
 
 

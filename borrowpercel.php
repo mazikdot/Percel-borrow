@@ -224,7 +224,7 @@ if (strlen($_SESSION['emplogin']) == 0) {
                                         รายละเอียดอื่น ๆ ข้อมูลเพิ่มเติมสามารถระบุได้ (หากมี)
                                     </div>
                                     <div class="input-field col l12 s12 m12">
-                                        <input id="Other" type="text" class="validate" autocomplete="off" name="Other" required>
+                                        <input id="Other" type="text" class="validate" autocomplete="off" name="Other">
                                     </div>
 
 

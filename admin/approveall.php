@@ -105,6 +105,7 @@ if (strlen($_SESSION['alogin']) == 0) {
                                 INNER JOIN tbtypepercel as c ON a.TypePercelIdAuto = c.TypePercelIdAuto 
                                 INNER JOIN tbpercel as d ON d.PercelIdAuto = c.PercelIdAuto
                                 INNER JOIN tblemployees as e ON a.id = e.id
+                                WHERE a.BorrowAmount > 0
                                 ORDER BY a.StatusBorrow ASC
                                 ";
                                     $query = $dbh->prepare($sql);

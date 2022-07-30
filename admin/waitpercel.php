@@ -1,5 +1,3 @@
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<srcript src="https://code.jquery.com/jquery-3.6.0.min.js"></srcript>
 <?php
 session_start();
 include('includes/config.php');
@@ -76,37 +74,37 @@ if (strlen($_SESSION['alogin']) == 0) {
         <?php include('includes/sidebar.php'); ?>
         <main class="mn-inner">
             <div class="row">
-
+                
 
                 <div class="col s12 m12 l12">
                     <div class="card">
                         <div class="card-content">
-                            <span class="card-title">แก้ไขสถานะ สามารถทำการปรับเปลี่ยนสถานะการเบิกได้ตามความต้องการ</span>
-
+                            <h5>สถานะที่ผ่านการอนุมัติ</h5>
+                            <p style="color:blue;">สถานะนี้จะหายไปเพื่อพัสดุส่งคืนสำเร็จ และจะเก็บประวัติในหมวดหมู่สถานะยืมคืนพัสดุ</p>
                             <table id="example" class="display responsive-table ">
                                 <thead>
                                     <tr>
                                         <th>#</th>
                                         <th width="350">หน้างาน</th>
-                                        <th width="300">พัสดุที่ยืม</th>
+                                        <th width="350">พัสดุที่ยืม</th>
                                         <th width="180">วันที่ยืม - คืน</th>
                                         <th width="180">ข้อมูลผู้ยืม</th>
                                         <th width="100">จำนวนที่ยืม</th>
-                                        <th width="180">สถานะ</th>
-                                        <th width="50">EDIT</th>
+                                        <th width="100">สถานะ</th>
+                                        <th width="100">คืนโดยแอดมิน</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    <?php $sql = "SELECT a.BorrowId,a.Work1,a.Work2,a.BorrowAmount,a.BorrowRequest
-                                ,a.BorrowReturn,a.Other,b.StatusBorrowName,c.TypePercelId,a.StatusBorrow,
-                                e.FirstName,e.LastName,e.Phonenumber,a.TimeRequest,c.typePercelAmount,a.NoteBorrow
+                                    <?php $sql = "    SELECT a.BorrowId,a.Work1,a.Work2,a.BorrowAmount,a.BorrowRequest
+                                ,a.BorrowReturn,a.Other,b.StatusBorrowName,c.TypePercelId,a.StatusBorrow,a.NoteBorrow,
+                                e.FirstName,e.LastName,e.Phonenumber,a.TimeRequest,c.typePercelAmount
                                 , c.TypePercelName,d.PercelName FROM tbborrow as a 
                                 INNER JOIN tbstatusborrow as b ON a.StatusBorrow = b.StatusBorrow 
                                 INNER JOIN tbtypepercel as c ON a.TypePercelIdAuto = c.TypePercelIdAuto 
                                 INNER JOIN tbpercel as d ON d.PercelIdAuto = c.PercelIdAuto
                                 INNER JOIN tblemployees as e ON a.id = e.id
-                                WHERE a.BorrowAmount > 0
+                                WHERE b.StatusBorrowName = 'อนุมัติการเบิก'AND a.BorrowAmount > 0
                                 ORDER BY a.StatusBorrow ASC
                                 ";
                                     $query = $dbh->prepare($sql);
@@ -116,7 +114,6 @@ if (strlen($_SESSION['alogin']) == 0) {
                                     if ($query->rowCount() > 0) {
                                         foreach ($results as $result) {
                                     ?>
-
                                             <tr>
                                                 <td> <b><?php echo htmlentities($cnt); ?></b></td>
                                                 <td> ยืมจากหน้างาน : <?php echo $result['Work1'];    ?>
@@ -126,31 +123,10 @@ if (strlen($_SESSION['alogin']) == 0) {
                                                 <td><?php echo "วันที่ยืม : {$result['BorrowRequest']} วันที่คืน : {$result['BorrowReturn']} ";  ?></td>
                                                 <td><?php echo "{$result['FirstName']} {$result['LastName']} เบอร์โทรศัพท์ : {$result['Phonenumber']}"; ?></td>
                                                 <td><?php echo $result['BorrowAmount']; ?></td>
-                                                <td><?php
-                                                    if ($result['StatusBorrowName'] == 'รอการอนุมัติ') { ?>
-                                                        <span style="color:blue;">รอการอนุมัติ</span>
-                                                        <?php if ($result['NoteBorrow'] != "") {  ?>
-                                                            <br> สาเหตุ : <?php echo "{$result['NoteBorrow']}"; ?>
-                                                        <?php  } ?>
-                                                    <?php   } else if ($result['StatusBorrowName'] == 'อนุมัติการเบิก') { ?>
-                                                        <span style="color:green;">อนุมัติการเบิก</span>
-                                                        <?php if ($result['NoteBorrow']  != "") {  ?>
-                                                            <br> สาเหตุ : <?php echo "{$result['NoteBorrow']}"; ?>
-                                                        <?php  } ?>
-                                                    <?php   } else { ?>
-                                                        <span style="color:red;">ปฎิเสธการเบิก</span>
-                                                        <?php if ($result['NoteBorrow']  != "") {  ?>
-                                                            <br> สาเหตุ : <?php echo "{$result['NoteBorrow']}"; ?>
-                                                        <?php  } ?>
-                                                    <?php   } ?>
-
-                                                </td>
                                                 <td>
-                                                    <?php if ($result['StatusBorrowName'] != 'อนุมัติการเบิก') { ?>
-                                                        <a style="background-color:blue; color:white;" href="updatestatusborrow.php?BorrowId=<?php echo $result['BorrowId']; ?>" class="btn btn-info">EDIT</a>
-                                                    <?php } ?>
-                                                        <button class="btn btn-danger" onCLick="deleteBorrowAdmin(<?php echo htmlentities($result['BorrowId']); ?>)">DELETE</button>
+                                                    <span style="color:red;">รอการคืน</span>
                                                 </td>
+                                                <td><a href="adminreturn.php?id=<?php echo $result['BorrowId']; ?>" class="btn btn-danger">คืน</a></td>
                                             </tr>
                                     <?php $cnt++;
                                         }
@@ -177,41 +153,6 @@ if (strlen($_SESSION['alogin']) == 0) {
         <script src="assets/js/pages/ui-modals.js"></script>
         <script src="assets/plugins/google-code-prettify/prettify.js"></script>
 
-
-        <script>
-            deleteBorrowAdmin = (id) => {
-          
-                swal({
-                    title: "คุณต้องการลบข้อมูลนี้ ใช่หรือไม่",
-                    text: "หากทำการลบข้อมูลนี้ประวัติขอเบิกหน้าผู้ใช้ก็จะหายไปด้วย",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                }).then((willDelete) => {
-                    if (willDelete) {
-                        $.ajax({
-                            type: "GET",
-                            url: "deleteborrowadmin.php",
-                            data: {
-                                deleteId: id
-                            },
-                            dataType: "html",
-                            success: function() {
-                                swal('สำเร็จ', 'ท่านได้ลบข้อมูลเรียบร้อยแล้ว', 'success').then(
-                                    function() {
-                                        window.location.href = 'editstatusall.php';
-                                    }
-                                );
-                            }
-                        })
-                    } else {
-
-                    }
-
-
-                });
-            }
-        </script>
     </body>
 
     </html>

@@ -68,7 +68,7 @@
                                     <?php
 
                                     //นับจำนวนสถานะผ่านการอนุมัติ
-                                    $sqlCount2 = "SELECT COUNT(StatusBorrow) as StatusBorrow FROM tbborrow WHERE StatusBorrow = 2";
+                                    $sqlCount2 = "SELECT COUNT(StatusBorrow) as StatusBorrow FROM tbborrow WHERE StatusBorrow = 2 AND BorrowAmount > 0";
                                     $queryCount2 = $dbh->prepare($sqlCount2);
                                     $queryCount2->execute();
                                     $resultsCount2 = $queryCount2->fetch(PDO::FETCH_ASSOC);
@@ -97,7 +97,16 @@
                     </div>
                 </li>
 
+                <li class="no-padding">
+                    <a class="collapsible-header waves-effect waves-grey"><i class="material-icons">account_box</i>สถานะยืม - คืน<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li><a href="waitpercel.php">รอการคืนพัสดุ</a></li>
+                            <li><a href="refusesuccess.php">คืนพัสดุสำเร็จ</a></li>
 
+                        </ul>
+                    </div>
+                </li>
 
 
                 <li class="no-padding">

@@ -74,76 +74,60 @@ if (strlen($_SESSION['alogin']) == 0) {
         <?php include('includes/sidebar.php'); ?>
         <main class="mn-inner">
             <div class="row">
-                
+
 
                 <div class="col s12 m12 l12">
                     <div class="card">
                         <div class="card-content">
-                            <h5>สถานะที่ผ่านการอนุมัติ</h5>
-                            <p style="color:blue;">สถานะนี้จะหายไปเพื่อพัสดุส่งคืนสำเร็จ และจะเก็บประวัติในหมวดหมู่สถานะยืมคืนพัสดุ</p>
-                            <table id="example" class="display responsive-table ">
+                            <h5 style="text-align:center; color:red;">พัสดุที่ฉันส่งคืนสำเร็จ</h5>
+                            <table id="example" class="display responsive-table">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th width="350">หน้างาน</th>
-                                        <th width="350">พัสดุที่ยืม</th>
-                                        <th width="180">วันที่ยืม - คืน</th>
-                                        <th width="180">ข้อมูลผู้ยืม</th>
-                                        <th width="100">จำนวนที่ยืม</th>
-                                        <th width="100">สถานะ</th>
+                                        <th>รหัส</th>
+                                        <th>พัสดุ</th>
+                                        <th>ประเภท</th>
+                                        <th>จำนวนคืน</th>
+                                        <th>วันที่ยืม</th>
+                                        <th>วันครบกำหนดยืม</th>
+                                        <th>สถานะ</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    <?php $sql = "    SELECT a.BorrowId,a.Work1,a.Work2,a.BorrowAmount,a.BorrowRequest
-                                ,a.BorrowReturn,a.Other,b.StatusBorrowName,c.TypePercelId,a.StatusBorrow,a.NoteBorrow,
-                                e.FirstName,e.LastName,e.Phonenumber,a.TimeRequest,c.typePercelAmount
+
+                                    <?php
+                                   
+                                    $sql = "
+                                SELECT a.refuseAmount,a.BorrowId,a.Work1,a.Work2,a.BorrowAmount,a.BorrowRequest
+                                ,a.BorrowReturn,a.Other,b.StatusBorrowName,c.TypePercelId,a.NoteBorrow
                                 , c.TypePercelName,d.PercelName FROM tbborrow as a 
                                 INNER JOIN tbstatusborrow as b ON a.StatusBorrow = b.StatusBorrow 
                                 INNER JOIN tbtypepercel as c ON a.TypePercelIdAuto = c.TypePercelIdAuto 
                                 INNER JOIN tbpercel as d ON d.PercelIdAuto = c.PercelIdAuto
-                                INNER JOIN tblemployees as e ON a.id = e.id
-                                WHERE b.StatusBorrowName = 'อนุมัติการเบิก'AND a.BorrowAmount > 0
-                                ORDER BY a.StatusBorrow ASC
+                                WHERE  b.StatusBorrowName = 'อนุมัติการเบิก' AND a.refuseAmount > 0;
+                                ;
+                            
                                 ";
                                     $query = $dbh->prepare($sql);
                                     $query->execute();
-                                    $results = $query->fetchAll(PDO::FETCH_ASSOC);
-                                    $cnt = 1;
+                                    $results = $query->fetchAll(PDO::FETCH_OBJ);
+
                                     if ($query->rowCount() > 0) {
-                                        foreach ($results as $result) {
-                                    ?>
-
+                                        foreach ($results as $result) {               ?>
                                             <tr>
-                                                <td> <b><?php echo htmlentities($cnt); ?></b></td>
-                                                <td> ยืมจากหน้างาน : <?php echo $result['Work1'];    ?>
-                                                    ไปยังหน้างาน : <?php echo $result['Work2'];    ?>
+                                                <td> <?php echo htmlentities($result->TypePercelId); ?></td>
+                                                <td><?php echo htmlentities($result->PercelName); ?></td>
+                                                <td><?php echo htmlentities($result->TypePercelName); ?></td>
+                                                <td><?php echo htmlentities($result->refuseAmount); ?></td>
+                                                <td><?php echo htmlentities($result->BorrowRequest); ?></td>
+                                                <td><?php echo htmlentities($result->BorrowReturn); ?></td>
+                                                <td>
+                                                    <span style="color:green;">ส่งคืนสำเร็จ</span>
                                                 </td>
-                                                <td><?php echo "{$result['TypePercelId']} {$result['PercelName']}";  ?> <?php echo "{$result['TypePercelName']}  " ?><span style="color:blue;">คงเหลือจำนวน : <?php echo $result['typePercelAmount']; ?> </span></td>
-                                                <td><?php echo "วันที่ยืม : {$result['BorrowRequest']} วันที่คืน : {$result['BorrowReturn']} ";  ?></td>
-                                                <td><?php echo "{$result['FirstName']} {$result['LastName']} เบอร์โทรศัพท์ : {$result['Phonenumber']}"; ?></td>
-                                                <td><?php echo $result['BorrowAmount']; ?></td>
-                                                <td><?php
-                                                    if ($result['StatusBorrowName'] == 'รอการอนุมัติ') { ?>
-                                                        <span style="color:blue;">รอการอนุมัติ</span>
-                                                        <?php if ($result['NoteBorrow'] != "") {  ?>
-                                                            <br> สาเหตุ : <?php echo "{$result['NoteBorrow']}"; ?>
-                                                        <?php  } ?>
-                                                    <?php   } else if ($result['StatusBorrowName'] == 'อนุมัติการเบิก') { ?>
-                                                        <span style="color:green;">อนุมัติการเบิก</span>
-                                                        <?php if ($result['NoteBorrow'] != "") {  ?>
-                                                            <br> สาเหตุ : <?php echo "{$result['NoteBorrow']}"; ?>
-                                                        <?php  } ?>
-                                                    <?php   } else { ?>
-                                                        <span style="color:red;">ปฎิเสธการเบิก</span>
-                                                        <?php if ($result['NoteBorrow'] != "") {  ?>
-                                                            <br> สาเหตุ : <?php echo "{$result['NoteBorrow']}"; ?>
-                                                        <?php  } ?>
-                                                    <?php   } ?>
 
-                                                </td>
+
                                             </tr>
-                                    <?php $cnt++;
+                                    <?php
                                         }
                                     } ?>
                                 </tbody>
@@ -156,6 +140,7 @@ if (strlen($_SESSION['alogin']) == 0) {
 
         </div>
         <div class="left-sidebar-hover"></div>
+
 
         <!-- Javascripts -->
         <script src="../assets/plugins/jquery/jquery-2.2.0.min.js"></script>

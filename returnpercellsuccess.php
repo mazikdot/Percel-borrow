@@ -81,19 +81,17 @@ if (strlen($_SESSION['emplogin']) == 0) {
             <div class="col s12 m12 l12">
                 <div class="card">
                     <div class="card-content">
-                        <h5 style="text-align:center;">ติดตามสถานะการอนุมัติ</h5>
-                        <span>สถานะนี้จะหายไป เมื่อคืนพัสดุและจะถูกจัดเก็บเป็นประวัติในหน้าส่งคืนพัสดุสำเร็จ</span>
+                        <h5 style="text-align:center; color:red;">พัสดุที่ฉันส่งคืนสำเร็จ</h5>
                         <table id="example" class="display responsive-table">
                             <thead>
                                 <tr>
                                     <th>รหัส</th>
-                                    <th width="150">พัสดุ</th>
-                                    <th width="300">ประเภท</th>
-                                    <th>จำนวน</th>
+                                    <th>พัสดุ</th>
+                                    <th>ประเภท</th>
+                                    <th>จำนวนคืน</th>
                                     <th>วันที่ยืม</th>
-                                    <th>วันที่คืน</th>
+                                    <th>วันครบกำหนดยืม</th>
                                     <th>สถานะ</th>
-                                    <th width="30">Action</th>
                                 </tr>
                             </thead>
 
@@ -102,13 +100,13 @@ if (strlen($_SESSION['emplogin']) == 0) {
                                 <?php
                                 $id = $_SESSION['eid'];
                                 $sql = "
-                                SELECT a.BorrowId,a.Work1,a.Work2,a.BorrowAmount,a.BorrowRequest
+                                SELECT a.refuseAmount,a.BorrowId,a.Work1,a.Work2,a.BorrowAmount,a.BorrowRequest
                                 ,a.BorrowReturn,a.Other,b.StatusBorrowName,c.TypePercelId,a.NoteBorrow
                                 , c.TypePercelName,d.PercelName FROM tbborrow as a 
                                 INNER JOIN tbstatusborrow as b ON a.StatusBorrow = b.StatusBorrow 
                                 INNER JOIN tbtypepercel as c ON a.TypePercelIdAuto = c.TypePercelIdAuto 
                                 INNER JOIN tbpercel as d ON d.PercelIdAuto = c.PercelIdAuto
-                                WHERE id=:id AND a.BorrowAmount > 0; 
+                                WHERE id=:id AND b.StatusBorrowName = 'อนุมัติการเบิก' AND a.refuseAmount > 0;
                                 ;
                             
                                 ";
@@ -123,32 +121,13 @@ if (strlen($_SESSION['emplogin']) == 0) {
                                             <td> <?php echo htmlentities($result->TypePercelId); ?></td>
                                             <td><?php echo htmlentities($result->PercelName); ?></td>
                                             <td><?php echo htmlentities($result->TypePercelName); ?></td>
-                                            <td><?php echo htmlentities($result->BorrowAmount); ?></td>
+                                            <td><?php echo htmlentities($result->refuseAmount); ?></td>
                                             <td><?php echo htmlentities($result->BorrowRequest); ?></td>
                                             <td><?php echo htmlentities($result->BorrowReturn); ?></td>
-                                            <td><?php
-                                                if ($result->StatusBorrowName == 'รอการอนุมัติ') { ?>
-                                                    <span style="color:blue;">รอการอนุมัติ</span>
-                                                    <?php if ($result->NoteBorrow != "") {  ?>
-                                                        <br> หมายเหตุ :     <?php echo "{$result->NoteBorrow}"; ?>
-                                                    <?php  } ?>
-                                                <?php   } else if ($result->StatusBorrowName == 'อนุมัติการเบิก') { ?>
-                                                    <span style="color:green;">อนุมัติการเบิก</span>
-                                                   <?php if ($result->NoteBorrow != "") {  ?>
-                                                           <br> หมายเหตุ :     <?php echo "{$result->NoteBorrow}"; ?>
-                                                    <?php  } ?>
-                                                <?php   } else { ?>
-                                                    <span style="color:red;">ปฎิเสธการเบิก</span>
-                                                    <?php if ($result->NoteBorrow != "") {  ?>
-                                                          <br>  หมายเหตุ : <?php echo "{$result->NoteBorrow}"; ?>
-                                                    <?php  } ?>
-                                                <?php   } ?>
-
-                                            </td>
                                             <td>
-                                                <a  class="btn btn-danger" href="edithistory.php?id=<?php echo $result->BorrowId ?>">EDIT</a>
-                                                <button style="background-color:red;" class="btn btn-danger" onCLick="deleteListHistory(<?php echo htmlentities($result->BorrowId); ?>)">Cancel</button>
+                                                <span style="color:green;">ส่งคืนสำเร็จ</span>
                                             </td>
+                                            
 
                                         </tr>
                                 <?php
@@ -177,40 +156,7 @@ if (strlen($_SESSION['emplogin']) == 0) {
     <script src="assets/plugins/datatables/js/jquery.dataTables.min.js"></script>
     <script src="assets/js/pages/table-data.js"></script>
 
-    <script>
-        deleteListHistory = (id) => {
-
-            swal({
-                title: "คุณต้องการลบข้อมูลนี้ ใช่หรือไม่",
-                text: "ลบประวัติการยืมพัสดุ",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            }).then((willDelete) => {
-                if (willDelete) {
-                    $.ajax({
-                        type: "GET",
-                        url: "deleteBorrow.php",
-                        data: {
-                            deleteId: id
-                        },
-                        dataType: "html",
-                        success: function() {
-                            swal('สำเร็จ', 'ท่านได้ลบข้อมูลเรียบร้อยแล้ว', 'success').then(
-                                function() {
-                                    window.location.href = 'listhistory.php';
-                                }
-                            );
-                        }
-                    })
-                } else {
-
-                }
-
-
-            });
-        }
-    </script>
+    
 
 </body>
 

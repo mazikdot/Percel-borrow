@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 30, 2022 at 02:20 PM
+-- Generation Time: Jul 30, 2022 at 08:41 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.3.31
 
@@ -75,7 +75,13 @@ INSERT INTO `tbborrow` (`BorrowId`, `Work1`, `Work2`, `BorrowAmount`, `BorrowReq
 (42, 'sad', 'sad', 0, '2022-07-15', '2022-07-14', 'sad', 2, 7, 2, '2022-07-30 11:38:35', '', 7),
 (43, 'asd', 'asd', 0, '2022-07-30', '2022-08-05', '-', 2, 7, 3, '2022-07-30 11:55:45', '', 3),
 (46, 'หฟก', 'หฟก', 0, '2022-07-08', '2022-08-07', '-', 2, 7, 3, '2022-07-30 11:59:11', '', 10),
-(47, 'asd', 'sad', 0, '2022-07-26', '2022-08-06', '-', 2, 7, 3, '2022-07-30 12:14:13', '', 15);
+(47, 'asd', 'sad', 0, '2022-07-26', '2022-08-06', '-', 2, 7, 3, '2022-07-30 12:14:13', '', 15),
+(48, 'หฟก', 'ฟหก', 0, '2022-07-01', '2022-07-03', '-', 2, 7, 3, '2022-07-30 15:12:47', 'รับของได้เลย', 15),
+(49, '49', '49', 3, '2022-07-01', '2022-07-28', '-', 2, 7, 2, '2022-07-30 17:55:09', '', 0),
+(50, '50', '50', 5, '2022-07-30', '2022-08-03', '-', 2, 7, 3, '2022-07-30 17:54:46', '-', 0),
+(51, 'sad', 'sad', 3, '2022-07-08', '2022-07-31', '-', 3, 7, 2, '2022-07-30 16:52:09', '', 0),
+(52, 'asd', 'sad', 1, '2022-07-07', '2022-08-07', '', 1, 7, 2, '2022-07-30 16:51:57', '', 0),
+(53, 'สงขลา', 'ยะลา', 2, '2022-07-22', '2022-07-23', '-', 2, 4, 2, '2022-07-30 18:37:30', '', 0);
 
 -- --------------------------------------------------------
 
@@ -85,19 +91,13 @@ INSERT INTO `tbborrow` (`BorrowId`, `Work1`, `Work2`, `BorrowAmount`, `BorrowReq
 
 CREATE TABLE `tblemployees` (
   `id` int(11) NOT NULL,
-  `EmpId` varchar(100) NOT NULL,
   `FirstName` varchar(150) NOT NULL,
   `LastName` varchar(150) NOT NULL,
   `EmailId` varchar(200) NOT NULL,
   `Password` varchar(180) NOT NULL,
   `Gender` varchar(100) NOT NULL,
-  `Dob` varchar(100) NOT NULL,
-  `Department` varchar(255) NOT NULL,
   `Address` varchar(255) NOT NULL,
-  `City` varchar(200) NOT NULL,
-  `Country` varchar(150) NOT NULL,
   `Phonenumber` char(11) NOT NULL,
-  `Status` int(1) NOT NULL,
   `RegDate` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -105,9 +105,9 @@ CREATE TABLE `tblemployees` (
 -- Dumping data for table `tblemployees`
 --
 
-INSERT INTO `tblemployees` (`id`, `EmpId`, `FirstName`, `LastName`, `EmailId`, `Password`, `Gender`, `Dob`, `Department`, `Address`, `City`, `Country`, `Phonenumber`, `Status`, `RegDate`) VALUES
-(4, '', 'ซูไอมี', 'ยะโกะ', 'suhaimee@gmail.com', '11501150', 'ชาย', '', '', 'ยะลา', '', '', '0936164981', 0, '2022-07-27 17:22:14'),
-(7, '', 'นายมูฮำหมัด', 'ปูตีล่า', 'mazikdot@rmutsvmail.com', '0836530374', 'ชาย', '', '', 'บ้านเลขที่ 90 หมู่ 11 ต.ท่าช้าง อ.บางกล่ำ จ.สงขลา 90110', '', '', '0834016682', 0, '2022-07-28 16:04:03');
+INSERT INTO `tblemployees` (`id`, `FirstName`, `LastName`, `EmailId`, `Password`, `Gender`, `Address`, `Phonenumber`, `RegDate`) VALUES
+(4, 'ซูไอมี', 'ยะโกะ', 'suhaimee@gmail.com', '11501150', 'ชาย', 'ยะลา', '0936164981', '2022-07-27 17:22:14'),
+(7, 'นายมูฮำหมัด', 'ปูตีล่า', 'mazikdot@rmutsvmail.com', '0836530374', 'ชาย', 'บ้านเลขที่ 90 หมู่ 11 ต.ท่าช้าง อ.บางกล่ำ จ.สงขลา 90110', '0834016682', '2022-07-28 16:04:03');
 
 -- --------------------------------------------------------
 
@@ -171,10 +171,11 @@ CREATE TABLE `tbtypepercel` (
 --
 
 INSERT INTO `tbtypepercel` (`TypePercelIdAuto`, `TypePercelId`, `TypePercelName`, `typePercelAmount`, `PercelIdAuto`) VALUES
-(2, 'B01', 'ขานั่งร้าน', 7, 7),
-(3, 'C01', 'แบบเหล็ก (แบบข้าง PRE-B) น้ำเงิน 60*120', 15, 8),
+(2, 'B01', 'ขานั่งร้าน', 0, 7),
+(3, 'C01', 'แบบเหล็ก (แบบข้าง PRE-B) น้ำเงิน 60*120', 10, 8),
 (4, 'D01', 'เครื่องปั้นหน้าคอนกรีต', 0, 9),
-(5, 'E01', 'เซี้ยม PVC ', 0, 10);
+(5, 'E01', 'เซี้ยม PVC ', 0, 10),
+(8, 'B02', 'ฝาครอบ', 0, 7);
 
 --
 -- Indexes for dumped tables
@@ -234,7 +235,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `tbborrow`
 --
 ALTER TABLE `tbborrow`
-  MODIFY `BorrowId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `BorrowId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `tblemployees`
@@ -258,7 +259,7 @@ ALTER TABLE `tbstatusborrow`
 -- AUTO_INCREMENT for table `tbtypepercel`
 --
 ALTER TABLE `tbtypepercel`
-  MODIFY `TypePercelIdAuto` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `TypePercelIdAuto` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables

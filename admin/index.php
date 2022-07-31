@@ -86,7 +86,7 @@ if (isset($_POST['signin'])) {
                                 <img width="40%" height="40%" src="../assets/images/icon-company.jpg" alt="Avatar">
 
                                 </div>
-                                <span class="card-title">Sign In</span>
+                                <span style="text-align:center;" class="card-title">Sign In</span>
                                 <div class="row">
                                     <form class="col s12" name="signin" method="post">
                                         <div class="input-field col s12">

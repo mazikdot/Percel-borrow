@@ -82,7 +82,7 @@ if (strlen($_SESSION['emplogin']) == 0) {
                 <div class="card">
                     <div class="card-content">
                         <h5 style="text-align:center;">ติดตามสถานะการอนุมัติ</h5>
-                        <span>สถานะนี้จะหายไป เมื่อคืนพัสดุและจะถูกจัดเก็บเป็นประวัติในหน้าส่งคืนพัสดุสำเร็จ</span>
+                        <span>สถานะนี้จะหายไป เมื่อคืนพัสดุ และจะถูกจัดเก็บเป็นประวัติในหน้าส่งคืนพัสดุสำเร็จ</span>
                         <table id="example" class="display responsive-table">
                             <thead>
                                 <tr>

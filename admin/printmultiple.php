@@ -14,7 +14,7 @@ if (isset($_SESSION['multiple'])) {
     // while($eiei = $res-> fetch_assoc()){
     //     echo $eiei['sell_name'];
     // }
-        $id = $_SESSION['multiple'];
+    $id = $_SESSION['multiple'];
     $sql = "    SELECT a.BorrowId,a.Work1,a.Work2,a.BorrowAmount,a.BorrowRequest
         ,a.BorrowReturn,a.Other,b.StatusBorrowName,c.TypePercelId,a.StatusBorrow,a.NoteBorrow,
         e.FirstName,e.LastName,e.Phonenumber,a.TimeRequest,c.typePercelAmount
@@ -29,8 +29,7 @@ if (isset($_SESSION['multiple'])) {
     $query = $dbh->prepare($sql);
     $query->bindParam(':id', $id);
     $query->execute();
-    
-}  
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,25 +63,38 @@ if (isset($_SESSION['multiple'])) {
             font-size: 14px;
 
         }
-        @page {margin:0;}
-    </style>
 
+        @page {
+            margin: 0;
+            size: A4;
+        }
+        body {
+            font-family: 'Kanit', sans-serif;
+            background: #ffffff;
+            color: #34495e;
+        }
+
+        #print {
+            
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet" />
 </head>
 
-<body>
-    <div class="center">
-        <button id="print" onclick="window.print()">Print</button>
-    </div>
+<body onload="window.print()">
+    <!-- <div class="center">
+        <button id="print" onclick="window.print()">ดาวโหลด หรือ พิมพ์เอกสาร</button>
+    </div> -->
     <div class="container">
         <header>
             <br><br><br>
             <h2>ข้อมูลการยืมพัสดุ</h2>
             <br><br>
-            <h4>บริษัท .........</h4><br>
+            <img src="../assets/images/icon-company.jpg" alt="Avatar" style="width:100px">
             <br><br><br>
         </header>
         <section>
-           
+
             <table style="width:85%">
                 <thead>
                     <tr>
@@ -102,19 +114,19 @@ if (isset($_SESSION['multiple'])) {
                         <tr>
                             <td style="text-align: center;" class="price"><?php echo $rows['TypePercelId']; ?></td>
                             <td style="text-align: center;"><?php echo "{$rows['TypePercelId']} {$rows['TypePercelName']}"; ?></td>
-                            <td style="text-align: center;" class="price"><?php echo $rows['BorrowAmount']?></td>
+                            <td style="text-align: center;" class="price"><?php echo $rows['BorrowAmount'] ?></td>
                             <td style="text-align: center;" class="price"><?php echo "{$rows['FirstName']} {$rows['LastName']}"; ?></td>
-                            <td style="text-align: center;" class="price"><?php echo $rows['Phonenumber']?></td>
+                            <td style="text-align: center;" class="price"><?php echo $rows['Phonenumber'] ?></td>
                         <?php
-    
+
                     }
                         ?>
                         </tr>
-                        
+
 
                 </tbody>
             </table>
-            
+
         </section>
     </div>
 </body>

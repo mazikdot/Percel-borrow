@@ -14,7 +14,7 @@
             <ul class="sidebar-menu collapsible collapsible-accordion" data-collapsible="accordion">
                 <li class="no-padding"><a class="waves-effect waves-grey" href="dashboard.php"><i class="material-icons">settings_input_svideo</i>หน้าหลัก</a></li>
                 <li class="no-padding">
-                    <a class="collapsible-header waves-effect waves-grey"><i class="material-icons">apps</i>จัดการจำนวนพัสดุ<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
+                    <a class="collapsible-header waves-effect waves-grey"><i class="material-icons">add</i>จัดการจำนวนพัสดุ<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
                     <div class="collapsible-body">
                         <ul>
                             <li><a href="addamountpercel.php">เพิ่มลดจำนวนพัสดุ</a></li>
@@ -98,7 +98,7 @@
                 </li>
 
                 <li class="no-padding">
-                    <a class="collapsible-header waves-effect waves-grey"><i class="material-icons">account_box</i>สถานะยืม - คืน<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
+                    <a class="collapsible-header waves-effect waves-grey"><i class="material-icons">assignment_turned_in</i>สถานะยืม - คืน<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
                     <div class="collapsible-body">
                         <ul>
                             <li><a href="waitpercel.php">รอการคืนพัสดุ
@@ -121,7 +121,7 @@
                     </div>
                 </li>
                 <li class="no-padding">
-                    <a class="collapsible-header waves-effect waves-grey"><i class="material-icons">account_box</i>พิมพ์เอกสาร<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
+                    <a class="collapsible-header waves-effect waves-grey"><i class="material-icons">local_printshop</i>พิมพ์เอกสาร<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
                     <div class="collapsible-body">
                         <ul>
                             <li><a href="printdoc.php">ข้อมูลการยืมพัสดุ

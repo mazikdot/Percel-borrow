@@ -16,7 +16,7 @@ if (strlen($_SESSION['alogin']) == 0) {
     <head>
 
         <!-- Title -->
-        <title>Admin | Total Leave </title>
+        <title>คืนพัสดุสำเร็จ</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta charset="UTF-8">
@@ -67,7 +67,7 @@ if (strlen($_SESSION['alogin']) == 0) {
         </style>
 
         <!-- icon -->
-        <link rel="icon" type="image/png" href="assets/images/icon-company.jpg" />
+        <link rel="icon" type="image/jpg" href="../assets/images/icon-company.jpg" />
     </head>
 
     <body>

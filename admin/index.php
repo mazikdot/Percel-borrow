@@ -62,7 +62,7 @@ if (isset($_POST['signin'])) {
     </style>
 
     <!-- icon -->
-    <link rel="icon" type="image/png" href="/admin/includes/icon-company.jpg" />
+    <link rel="icon" type="image/png" href="../assets/images/icon-company.jpg" />
 
     <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
@@ -76,12 +76,16 @@ if (isset($_POST['signin'])) {
 <body class="signin-page">
     <div class="mn-content valign-wrapper">
         <main class="mn-inner container">
-            <h4 align="center"><a>ระบบยืมคืนพัสดุออนไลน์</a></h4>
+            <h4 align="center"><a>ระบบยืมคืนพัสดุ</a></h4>
             <div class="valign">
                 <div class="row">
                     <div class="col s12 m6 l4 offset-l4 offset-m3">
                         <div class="card white darken-1">
                             <div class="card-content ">
+                                <div style="text-align:center;">
+                                <img width="40%" height="40%" src="../assets/images/icon-company.jpg" alt="Avatar">
+
+                                </div>
                                 <span class="card-title">Sign In</span>
                                 <div class="row">
                                     <form class="col s12" name="signin" method="post">

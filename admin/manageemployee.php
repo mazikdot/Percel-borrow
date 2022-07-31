@@ -65,7 +65,7 @@ if (strlen($_SESSION['alogin']) == 0) {
         </style>
 
         <!-- icon -->
-        <link rel="icon" type="image/png" href="assets/images/icon-company.jpg" />
+        <link rel="icon" type="image/jpg" href="../assets/images/icon-company.jpg" />
     </head>
 
     <body>

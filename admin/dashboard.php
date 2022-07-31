@@ -33,6 +33,7 @@ if (strlen($_SESSION['alogin']) == 0) {
         <link rel="icon" type="image/png" href="assets/images/icon-company.jpg" />
 
         <!-- font -->
+        
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped&display=swap" rel="stylesheet">
@@ -46,7 +47,7 @@ if (strlen($_SESSION['alogin']) == 0) {
         </style>
 
         <!-- icon -->
-        <link rel="icon" type="image/png" href="/assets/images/icon-company.jpg" />
+        <link rel="icon" type="image/png" href="../assets/images/icon-company.jpg" />
 
     </head>
 
@@ -89,6 +90,9 @@ if (strlen($_SESSION['alogin']) == 0) {
                                     <span class="counter"><?php echo htmlentities($empcount); ?></span></span>
                             </div>
                             <div id="sparkline-bar"></div>
+                            <div class="progress stats-card-progress">
+                                <div class="determinate" style="width: 50%"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="col s12 m12 l6">
@@ -106,6 +110,9 @@ if (strlen($_SESSION['alogin']) == 0) {
                                 <span class="stats-counter"><span class="counter"><?php echo htmlentities($results['typePercelAmount']); ?></span></span>
                             </div>
                             <div id="sparkline-line"></div>
+                            <div class="progress stats-card-progress">
+                                <div class="determinate" style="width: 50%"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="col s12 m12 l6">
@@ -124,7 +131,7 @@ if (strlen($_SESSION['alogin']) == 0) {
 
                             </div>
                             <div class="progress stats-card-progress">
-                                <div class="determinate" style="width: 70%"></div>
+                                <div class="determinate" style="width: 50%;"></div>
                             </div>
                         </div>
                     </div>
@@ -144,7 +151,7 @@ if (strlen($_SESSION['alogin']) == 0) {
 
                             </div>
                             <div class="progress stats-card-progress">
-                                <div class="determinate" style="width: 70%"></div>
+                                <div class="determinate" style="width: 50%"></div>
                             </div>
                         </div>
                     </div>
@@ -164,7 +171,7 @@ if (strlen($_SESSION['alogin']) == 0) {
 
                             </div>
                             <div class="progress stats-card-progress">
-                                <div class="determinate" style="width: 70%"></div>
+                                <div class="determinate" style="width: 50%"></div>
                             </div>
                         </div>
                     </div>
@@ -184,7 +191,7 @@ if (strlen($_SESSION['alogin']) == 0) {
 
                             </div>
                             <div class="progress stats-card-progress">
-                                <div class="determinate" style="width: 70%"></div>
+                                <div class="determinate" style="width: 50%"></div>
                             </div>
                         </div>
                     </div>

@@ -1,8 +1,8 @@
-
 <?php
 
-session_start();
+
 include('includes/config.php');
+session_start();
 if (isset($_POST['signin'])) {
     $uname = $_POST['username'];
     $password = $_POST['password'];
@@ -15,9 +15,8 @@ if (isset($_POST['signin'])) {
     if ($query->rowCount() > 0) {
         foreach ($results as $result) {
             // $status = $result->Status;
-            $_SESSION['emplogin']=$_POST['username'];
+            $_SESSION['emplogin'] = $_POST['username'];
             $_SESSION['eid'] = $result['id'];
-           
         }
         echo "<script>window.location.href='myprofile.php'</script>";
     } else {
@@ -55,7 +54,7 @@ swal('รหัสผ่านไม่ถูกต้อง', 'โปรดต�
 
     <!-- Styles -->
     <link type="text/css" rel="stylesheet" href="assets/plugins/materialize/css/materialize.min.css" />
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
     <link href="assets/plugins/material-preloader/css/materialPreloader.min.css" rel="stylesheet">
 
 
@@ -84,7 +83,31 @@ swal('รหัสผ่านไม่ถูกต้อง', 'โปรดต�
             font-family: 'IBM Plex Sans Thai Looped', sans-serif;
         }
     </style>
+    <style>
+        /* fallback */
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: url(https://fonts.gstatic.com/s/materialicons/v135/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+        }
 
+        .material-icons {
+            font-family: 'Material Icons';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
     <!-- icon -->
     <link rel="icon" type="image/png" href="assets/images/icon-company.jpg" />
 
@@ -196,7 +219,7 @@ swal('รหัสผ่านไม่ถูกต้อง', 'โปรดต�
                             <div class="center">
                                 <span class="card-title" style="font-size:20px;">กรุณาล็อกอินเพื่อเข้าสู่ระบบ ยืม-คืน พัสดุ</span>
                             </div>
-                         
+
                             <div class="row">
                                 <form class="col s12" name="signin" method="post">
                                     <div class="input-field col s12"><input id="username" type="text" name="username" class="validate" autocomplete="off" required>

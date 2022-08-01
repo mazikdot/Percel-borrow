@@ -15,18 +15,18 @@ if (strlen($_SESSION['emplogin']) == 0) {
 } else {
     // Code for change password 
     if (isset($_POST['add'])) {
-        
+
         $TypePercelIdAuto = $_GET['id'];
         $id = $_SESSION['eid'];
         $StatusBorrow = 1;
-        
+
         $Work1 = $_POST['Work1'];
         $Work2 = $_POST['Work2'];
         $BorrowAmount = $_POST['BorrowAmount'];
         $BorrowRequest = $_POST['BorrowRequest'];
         $BorrowReturn = $_POST['BorrowReturn'];
         $Other = $_POST['Other'];
-        if($resultPercel['typePercelAmount'] < $BorrowAmount){
+        if ($resultPercel['typePercelAmount'] < $BorrowAmount) {
             echo "<script>
             swal('พัสดุไม่เพียงต่อการยืม', 'โปรดตรวจสอบจำนวนการยืมอีกครั้ง', 'warning').then(
                 function() {
@@ -47,7 +47,7 @@ if (strlen($_SESSION['emplogin']) == 0) {
             $query->bindParam(':TypePercelIdAuto', $TypePercelIdAuto, PDO::PARAM_STR);
             $query->bindParam(':StatusBorrow', $StatusBorrow, PDO::PARAM_STR);
             $query->execute();
-            if($query){
+            if ($query) {
                 echo "<script>
                 swal('ทำการยืมพัสดุเรียบร้อยแล้ว', 'โปรดติดตามสถานะในหน้าประวัติการยืม', 'success').then(
                     function() {
@@ -57,10 +57,7 @@ if (strlen($_SESSION['emplogin']) == 0) {
                 </script>";
             }
         }
-       
     }
-
-   
 }
 ?>
 
@@ -81,7 +78,7 @@ if (strlen($_SESSION['emplogin']) == 0) {
     <!-- Styles -->
 
     <link type="text/css" rel="stylesheet" href="assets/plugins/materialize/css/materialize.min.css" />
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
     <link href="assets/plugins/material-preloader/css/materialPreloader.min.css" rel="stylesheet">
     <link href="assets/css/alpha.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/custom.css" rel="stylesheet" type="text/css" />
@@ -105,7 +102,31 @@ if (strlen($_SESSION['emplogin']) == 0) {
             box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
         }
     </style>
+    <style>
+        /* fallback */
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: url(https://fonts.gstatic.com/s/materialicons/v135/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+        }
 
+        .material-icons {
+            font-family: 'Material Icons';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

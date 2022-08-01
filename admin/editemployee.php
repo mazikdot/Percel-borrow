@@ -58,7 +58,7 @@ if (strlen($_SESSION['alogin']) == 0) {
 
         <!-- Styles -->
         <link type="text/css" rel="stylesheet" href="../assets/plugins/materialize/css/materialize.min.css" />
-        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!-- <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
         <link href="../assets/plugins/material-preloader/css/materialPreloader.min.css" rel="stylesheet">
         <link href="../assets/css/alpha.min.css" rel="stylesheet" type="text/css" />
         <link href="../assets/css/custom.css" rel="stylesheet" type="text/css" />
@@ -81,6 +81,31 @@ if (strlen($_SESSION['alogin']) == 0) {
                 box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
             }
         </style>
+        <style>
+        /* fallback */
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/materialicons/v135/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+    </style>
         <!-- font -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

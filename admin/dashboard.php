@@ -33,7 +33,7 @@ if (strlen($_SESSION['alogin']) == 0) {
         <link rel="icon" type="image/png" href="assets/images/icon-company.jpg" />
 
         <!-- font -->
-        
+
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped&display=swap" rel="stylesheet">
@@ -46,31 +46,31 @@ if (strlen($_SESSION['alogin']) == 0) {
             }
         </style>
 
-<style>
-        /* fallback */
-@font-face {
-  font-family: 'Material Icons';
-  font-style: normal;
-  font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/materialicons/v135/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
-}
+        <style>
+            /* fallback */
+            @font-face {
+                font-family: 'Material Icons';
+                font-style: normal;
+                font-weight: 400;
+                src: url(https://fonts.gstatic.com/s/materialicons/v135/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+            }
 
-.material-icons {
-  font-family: 'Material Icons';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 24px;
-  line-height: 1;
-  letter-spacing: normal;
-  text-transform: none;
-  display: inline-block;
-  white-space: nowrap;
-  word-wrap: normal;
-  direction: ltr;
-  -webkit-font-feature-settings: 'liga';
-  -webkit-font-smoothing: antialiased;
-}
-    </style>
+            .material-icons {
+                font-family: 'Material Icons';
+                font-weight: normal;
+                font-style: normal;
+                font-size: 24px;
+                line-height: 1;
+                letter-spacing: normal;
+                text-transform: none;
+                display: inline-block;
+                white-space: nowrap;
+                word-wrap: normal;
+                direction: ltr;
+                -webkit-font-feature-settings: 'liga';
+                -webkit-font-smoothing: antialiased;
+            }
+        </style>
         <!-- icon -->
         <link rel="icon" type="image/png" href="../assets/images/icon-company.jpg" />
 
@@ -95,13 +95,23 @@ if (strlen($_SESSION['alogin']) == 0) {
 
 
         <main class="mn-inner">
-            <h5 style="text-align:center;">รายงานจำนวนต่าง ๆ ในระบบ</h5>
+            <div class="row">
+                <div class="col s12 m12 l9">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title" style="text-align:center; color:red;">รายงานจำนวนต่าง ๆ ในระบบ</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
             <div class="middle-content">
                 <div class="row no-m-t no-m-b">
                     <div class="col s12 m12 l6">
                         <div class="card stats-card">
                             <div class="card-content">
-                                
+
                                 <span class="card-title">จำนวนพนักงานทั้งหมด</span>
                                 <span class="stats-counter">
                                     <?php
@@ -222,7 +232,7 @@ if (strlen($_SESSION['alogin']) == 0) {
                     </div>
                 </div>
 
-               
+
             </div>
 
         </main>
@@ -230,7 +240,7 @@ if (strlen($_SESSION['alogin']) == 0) {
         </div>
 
 
-        
+
         <!-- Javascripts -->
         <script src="../assets/plugins/jquery/jquery-2.2.0.min.js"></script>
         <script src="../assets/plugins/materialize/js/materialize.min.js"></script>

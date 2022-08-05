@@ -2128,11 +2128,14 @@ th {
 }
 @media only screen and (max-width: 992px) {
   table.responsive-table {
-    width: 100%;
+    /* width: 100%; */
     border-collapse: collapse;
     border-spacing: 0;
     display: block;
     position: relative;
+    /* หมัดแก้ */
+    max-width: none;
+    /* จบหมัดแก้ */
   }
   table.responsive-table td:empty:before {
     content: "\00a0";
@@ -2198,6 +2201,7 @@ th {
   table.responsive-table.bordered tbody tr {
     border-right: 1px solid #d0d0d0;
   }
+
 }
 .collection {
   margin: 0.5rem 0 1rem 0;

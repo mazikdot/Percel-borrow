@@ -114,12 +114,13 @@ if (strlen($_SESSION['alogin']) == 0) {
                                         <th width="180">วันที่ยืม - คืน</th>
                                         <th width="180">ข้อมูลผู้ยืม</th>
                                         <th width="100">จำนวนที่ยืม</th>
+                                        <th width="100">วันที่ส่งคำขอ</th>
                                         <th width="100">สถานะ</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    <?php $sql = "    SELECT a.BorrowId,a.Work1,a.Work2,a.BorrowAmount,a.BorrowRequest
+                                    <?php $sql = "    SELECT a.BorrowId,a.Work1,a.Work2,a.BorrowAmount,a.BorrowRequest,a.TimeRequest
                                 ,a.BorrowReturn,a.Other,b.StatusBorrowName,c.TypePercelId,a.StatusBorrow,
                                 e.FirstName,e.LastName,e.Phonenumber,a.TimeRequest,c.typePercelAmount,a.NoteBorrow
                                 , c.TypePercelName,d.PercelName FROM tbborrow as a 
@@ -128,7 +129,7 @@ if (strlen($_SESSION['alogin']) == 0) {
                                 INNER JOIN tbpercel as d ON d.PercelIdAuto = c.PercelIdAuto
                                 INNER JOIN tblemployees as e ON a.id = e.id
                                 WHERE b.StatusBorrowName = 'รอการอนุมัติ'
-                                ORDER BY a.StatusBorrow ASC
+                                ORDER BY a.TimeRequest DESC
                                 ";
                                     $query = $dbh->prepare($sql);
                                     $query->execute();
@@ -147,6 +148,8 @@ if (strlen($_SESSION['alogin']) == 0) {
                                                 <td><?php echo "วันที่ยืม : {$result['BorrowRequest']} วันที่คืน : {$result['BorrowReturn']} ";  ?></td>
                                                 <td><?php echo "{$result['FirstName']} {$result['LastName']} เบอร์โทรศัพท์ : {$result['Phonenumber']}"; ?></td>
                                                 <td><?php echo $result['BorrowAmount']; ?></td>
+                                                <td><?php echo $result['TimeRequest']; ?></td>
+                                                
                                                 <td><?php
                                                     if ($result['StatusBorrowName'] == 'รอการอนุมัติ') { ?>
                                                         <span style="color:blue;">รอการอนุมัติ</span>

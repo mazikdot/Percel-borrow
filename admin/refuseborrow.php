@@ -114,6 +114,7 @@ if (strlen($_SESSION['alogin']) == 0) {
                                         <th width="180">วันที่ยืม - คืน</th>
                                         <th width="180">ข้อมูลผู้ยืม</th>
                                         <th width="100">จำนวนที่ยืม</th>
+                                        <th width="100">วันที่ส่งคำขอ</th>
                                         <th width="100">สถานะ</th>
                                     </tr>
                                 </thead>
@@ -147,6 +148,7 @@ if (strlen($_SESSION['alogin']) == 0) {
                                                 <td><?php echo "วันที่ยืม : {$result['BorrowRequest']} วันที่คืน : {$result['BorrowReturn']} ";  ?></td>
                                                 <td><?php echo "{$result['FirstName']} {$result['LastName']} เบอร์โทรศัพท์ : {$result['Phonenumber']}"; ?></td>
                                                 <td><?php echo $result['BorrowAmount']; ?></td>
+                                                <td><?php echo $result['TimeRequest']; ?></td>
                                                 <td><?php
                                                     if ($result['StatusBorrowName'] == 'รอการอนุมัติ') { ?>
                                                         <span style="color:blue;">รอการอนุมัติ</span>

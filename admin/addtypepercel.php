@@ -33,9 +33,7 @@ if (strlen($_SESSION['alogin']) == 0) {
             $query->bindParam(':PercelIdAuto', $PercelIdAuto, PDO::PARAM_STR);
 
             $query->execute();
-            $lastInsertId = $dbh->lastInsertId();
-
-            if ($lastInsertId) {
+    
                 echo "<script>
             swal('สำเร็จ', 'ท่านได้ทำการเพิ่มชนิดพัสดุเรียบร้อยแล้ว', 'success').then(
                 function() {
@@ -43,7 +41,7 @@ if (strlen($_SESSION['alogin']) == 0) {
                 }
               );
             </script>";
-            }
+            
         }
     }
 } ?>

@@ -117,6 +117,7 @@ if (strlen($_SESSION['emplogin']) == 0) {
                                     <th>จำนวน</th>
                                     <th>วันที่ยืม</th>
                                     <th>วันที่คืน</th>
+                                    <th>วันที่ส่งคำขอ</th>
                                     <th>สถานะ</th>
                                     <th width="30">Action</th>
                                 </tr>
@@ -127,7 +128,7 @@ if (strlen($_SESSION['emplogin']) == 0) {
                                 <?php
                                 $id = $_SESSION['eid'];
                                 $sql = "
-                                SELECT a.BorrowId,a.Work1,a.Work2,a.BorrowAmount,a.BorrowRequest
+                                SELECT a.BorrowId,a.Work1,a.Work2,a.BorrowAmount,a.BorrowRequest,a.TimeRequest
                                 ,a.BorrowReturn,a.Other,b.StatusBorrowName,c.TypePercelId,a.NoteBorrow
                                 , c.TypePercelName,d.PercelName FROM tbborrow as a 
                                 INNER JOIN tbstatusborrow as b ON a.StatusBorrow = b.StatusBorrow 
@@ -151,6 +152,7 @@ if (strlen($_SESSION['emplogin']) == 0) {
                                             <td><?php echo htmlentities($result->BorrowAmount); ?></td>
                                             <td><?php echo htmlentities($result->BorrowRequest); ?></td>
                                             <td><?php echo htmlentities($result->BorrowReturn); ?></td>
+                                            <td><?php echo htmlentities($result->TimeRequest); ?></td>
                                             <td><?php
                                                 if ($result->StatusBorrowName == 'รอการอนุมัติ') { ?>
                                                     <span style="color:blue;">รอการอนุมัติ</span>
